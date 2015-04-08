@@ -1,18 +1,21 @@
 <?php
-include('login.php'); // Includes Login Script
+include('session.php');
 
-$greeting = "";
-
-//if(isset($_SESSION['login_user'])) {
-if(login_user = $computing_id) {
-    // header("location: profile.php");
-    $greeting = "Logged in as " . $name;
-    //$greeting = "Hello asshole";
-} else {
-    //$greeting = "Logged in as " . $name;
-    $greeting = "Hello asshole";
+$con=mysqli_connect("stardock.cs.virginia.edu","cs4750ydc5yf","yujin","cs4750ydc5yf");
+// Check connection
+if (mysqli_connect_errno()) {
+  echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
+
+$sec_id = $_GET['sec_id'];
+
+$sectionlist = mysqli_query($con,"SELECT section_id FROM section");
+
+$validupdate = 0;
+
 ?>
+
+
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US" xml:lang="en">
@@ -49,23 +52,23 @@ if(login_user = $computing_id) {
                             <a href="/~ydc5yf" class=" active"><span class="l"></span><span class="r"></span><span class="t">Home</span></a>
                         </li>
                         <li>
-                            <a href="dept.html"><span class="l"></span><span class="r"></span><span class="t">CS Department</span></a>
+                            <a href="dept.php"><span class="l"></span><span class="r"></span><span class="t">CS Department</span></a>
                             <ul>
-                                <li><a href="major.html">Major</a>
+                                <li><a href="major.php">Major</a>
                                     <ul>
-                                        <li><a href="bscs.html">Bachelor of Science</a></li>
-                                        <li><a href="bacs.html">Bachelor of Arts</a></li>
+                                        <li><a href="bscs.php">Bachelor of Science</a></li>
+                                        <li><a href="bacs.php">Bachelor of Arts</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="minor.html">Minor</a></li>
-                                <li><a href="faculty.html">Faculty</a></li>
+                                <li><a href="minor.php">Minor</a></li>
+                                <li><a href="faculty.php">Faculty</a></li>
                             </ul>
                         </li>
                         <li>
                             <a href="registry.php"><span class="l"></span><span class="r"></span><span class="t">Course Registry</span></a>
                         </li>       
                         <li>
-                            <a href="about.html"><span class="l"></span><span class="r"></span><span class="t">About</span></a>
+                            <a href="about.php"><span class="l"></span><span class="r"></span><span class="t">About</span></a>
                         </li>
                 	</ul>
                 </div>
@@ -82,10 +85,49 @@ if(login_user = $computing_id) {
                             <div class="art-Post-body">
                         <div class="art-Post-inner">
                                         <h2 class="art-PostHeader">
-                                            About
+                                            My Schedule
                                         </h2>
                                         <div class="art-PostContent">
-                                            <p><span class="greeting"><?php echo $greeting; ?></span></p>
+                                            <?php 
+                                            while($validsection = mysqli_fetch_array($sectionlist)) {
+													if ($sec_id == $validsection['section_id']) {
+
+														$sql = mysqli_query($con,"INSERT INTO takes (computing_id, section_id) VALUES ('$login_session', $sec_id)");
+
+												$section_id = mysqli_real_escape_string($con, $_GET['section_id']);
+												$course_id = mysqli_real_escape_string($con, $_GET['course_id']);
+												$name = mysqli_real_escape_string($con, $_GET['name']);
+
+												$results = mysqli_query($con,"SELECT * FROM takes natural join section natural join course WHERE computing_id = '$login_session'");
+                                                echo "Below is your new course schedule:";
+
+												echo "<table border='1'>
+												<tr>
+												<th>Section ID</th>
+												<th>Course ID</th>
+												<th>Course Name</th>
+												</tr>";
+
+												while($row = mysqli_fetch_array($results)) {
+												echo "<tr>";
+												echo "<td>" . $row['section_id'] . "</td>";
+												echo "<td>" . $row['course_id'] . "</td>";
+												echo "<td>" . $row['name'] . "</td>";
+												echo "</tr>";
+												}
+
+												echo "</table>";
+												
+												mysqli_close($con);
+
+												$validupdate = 1;
+
+												}
+
+												}
+
+												if ($validupdate == 0) {echo "Section is invalid, your schedule was not updated.";}
+                                            ?>
                                         </div>
                                     </div>
                         
@@ -109,29 +151,17 @@ if(login_user = $computing_id) {
                                             <div class="l"></div>
                                             <div class="r"></div>
                                             <div class="art-header-tag-icon">
-                                                <div class="t">Login</div>
+                                                <div class="t">Welcome back!</div>
                                             </div>
                                         </div><div class="art-BlockContent">
                                             <div class="art-BlockContent-body">
-                                                <div>
-                                                    <form class="loginform" method="post" action=""></span>
-                                                    <table><tr>
-                                                <td><label>Username</label></td>
-                                                <td><input type="text" name="username" placeholder="ex. mst3k"></td></tr>
-                                                <tr><td><label>Password</label></td>
-                                                <td><input type="password" name="pass"></td></tr></table>
-                                                    <div align="center">
-                                                    <p><span class="error"><?php echo $error;?></span></p>
-                                                <span class="art-button-wrapper">
-                                                    <span class="l"> </span>
-                                                    <span class="r"> </span>
-                                                    <input class="art-button" type="submit" name="login" value="Login" />
-                                                </span></form>
-                                                <p><div class="art-Footer-text"><a href="/~ydc5yf/register.php">Register</a> | <a href="/~ydc5yf/reset.php">Reset Password</a>
-                                                </div>
-                                                </div>
-                                                
-                                                </div>
+                                            <div align="center">Hello there, <?php echo $name; ?>.
+                                                <br><br><a href="schedule.php">My Schedule</a>
+                                                <br><a href="history.php">Course History</a>
+                                                <br><a href="checklist.php">Course Checklist</a>
+                                                <br><a href="settings.php">Settings</a>
+										        <br><a href="logout.php">Log Out</a>
+                                            </div>
                                         		<div class="cleared"></div>
                                             </div>
                                         </div>

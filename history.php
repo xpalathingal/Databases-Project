@@ -37,15 +37,15 @@ include('session.php');
                             <a href="/~ydc5yf" class=" active"><span class="l"></span><span class="r"></span><span class="t">Home</span></a>
                         </li>
                         <li>
-                            <a href="dept.html"><span class="l"></span><span class="r"></span><span class="t">CS Department</span></a>
+                            <a href="dept.php"><span class="l"></span><span class="r"></span><span class="t">CS Department</span></a>
                             <ul>
-                                <li><a href="major.html">Major</a>
+                                <li><a href="major.php">Major</a>
                                     <ul>
-                                        <li><a href="bscs.html">Bachelor of Science</a></li>
-                                        <li><a href="bacs.html">Bachelor of Arts</a></li>
+                                        <li><a href="bscs.php">Bachelor of Science</a></li>
+                                        <li><a href="bacs.php">Bachelor of Arts</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="minor.html">Minor</a></li>
+                                <li><a href="minor.php">Minor</a></li>
                                 <li><a href="faculty.php">Faculty</a></li>
                             </ul>
                         </li>
@@ -53,7 +53,7 @@ include('session.php');
                             <a href="registry.php"><span class="l"></span><span class="r"></span><span class="t">Course Registry</span></a>
                         </li>       
                         <li>
-                            <a href="about.html"><span class="l"></span><span class="r"></span><span class="t">About</span></a>
+                            <a href="about.php"><span class="l"></span><span class="r"></span><span class="t">About</span></a>
                         </li>
                 	</ul>
                 </div>

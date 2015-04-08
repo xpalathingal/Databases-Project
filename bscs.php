@@ -16,16 +16,7 @@ $greet = $row['first_name'];
 $department = mysqli_real_escape_string($con, $_GET['department']);
 $course_id = mysqli_real_escape_string($con, $_GET['course_id']);
 $name = mysqli_real_escape_string($con, $_GET['name']);
-$building = mysqli_real_escape_string($con, $_GET['building']);
-$room_number = mysqli_real_escape_string($con, $_GET['room_number']);
-$days = mysqli_real_escape_string($con, $_GET['days']);
-$start_time = mysqli_real_escape_string($con, $_GET['start_time']);
-$end_time = mysqli_real_escape_string($con, $_GET['end_time']);
-$results = mysqli_query($con,"SELECT * FROM course
-    LEFT OUTER JOIN section on course.course_id = section.course_id
-    LEFT OUTER JOIN held_in on section.section_id = held_in.section_id
-    LEFT OUTER JOIN timeslots on section.timeslot_id = timeslots.timeslot_id
-    WHERE fall2015 = 1");
+$results = mysqli_query($con,"SELECT * FROM course NATURAL JOIN requirements WHERE major = 'BSCS'");
 
 mysqli_close($con);
 ?>
@@ -98,24 +89,21 @@ mysqli_close($con);
                             <div class="art-Post-body">
                                 <div class="art-Post-inner">
                                     <h2 class="art-PostHeader">
-                                        Course Details
+                                        Bachelor of Science in Computer Science
                                     </h2>
                                     <div class="art-PostContent">
-                                        <a href="registry.php">Back to Fall 2015 course listing</a> 
-                                        <?php
-                                        echo "<table border='1'>
-                                        <tr>
-                                        <th>Course</th>
-                                        <th>Name</th>
-                                        <th>Location</th>
-                                        <th>Time</th>
-                                        </tr>";
-                                        while($row = mysqli_fetch_array($results)) {
+                                       <a href="major.php">Back to CS major description</a>
+                                       <p>In addition to these required courses, BS CS majors must take 5 extra computing electives.  
+                                          <?php
+                                          echo "<table border='1'>
+                                          <tr>
+                                          <th>Course</th>
+                                          <th>Name</th>
+                                          </tr>";
+                                          while($row = mysqli_fetch_array($results)) {
                                             echo "<tr>";
                                             echo "<td>" . $row['department']. " " . $row['course_id'] . "</td>";
                                             echo "<td>" . $row['name'] . "</td>";
-                                            echo "<td>" . $row['building']. " " . $row['room_number'] . "</td>";
-                                            echo "<td>" . $row['days']. " " . $row['start_time']. "-" . $row['end_time'] . "</td>";
                                             echo "</tr>";
                                         }
                                         echo "</table>";

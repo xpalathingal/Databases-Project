@@ -1,20 +1,17 @@
 <?php
 include('session.php');
-
 $con=mysqli_connect("stardock.cs.virginia.edu","cs4750ydc5yf","yujin","cs4750ydc5yf");
 // Check connection
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
 
-$results = mysqli_query($con,"SELECT *
-    FROM student NATURAL JOIN requirements NATURAL JOIN course
-    WHERE computing_id ='$login_session' AND course_id NOT IN 
-        (SELECT course_id
-        FROM takes NATURAL JOIN section
-        WHERE computing_id = '$login_session')");
+$sec_id = $_GET['sec_id'];
 
-mysqli_close($con);
+$validdelete = 0;
+
+$takeslist = mysqli_query($con,"SELECT section_id FROM takes WHERE computing_id = '$login_session'");
+
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -85,29 +82,49 @@ mysqli_close($con);
                             <div class="art-Post-body">
                         <div class="art-Post-inner">
                                         <h2 class="art-PostHeader">
-                                            Course Checklist
+                                            My Schedule
                                         </h2>
                                         <div class="art-PostContent">
-                                            <b>Courses you still need to take: </b>
-                                    <br><br>
-                                    <?php
-                                    echo "<table border='1'>
-                                    <tr>
-                                        <th>Course ID</th>
-                                        <th>Course Name</th>    
-                                        <th>Credits</th>
-                                    </tr>";
+                                            <?php 
+                                                 while ($validsection =mysqli_fetch_array($takeslist)) {
+													if ($sec_id == $validsection['section_id']) {
 
-                                    while($row = mysqli_fetch_array($results)) {
-                                      echo "<tr>";
-                                      echo "<td>" . $row['course_id'] . "</td>";
-                                      echo "<td>" . $row['name'] . "</td>";
-                                      echo "<td>" . $row['credits'] . "</td>";
-                                      echo "</tr>";
-                                  }
+												$sql = mysqli_query($con,"DELETE FROM takes WHERE section_id = $sec_id AND computing_id = '$login_session'");
 
-                                  echo "</table>";
-                                  ?>
+												$section_id = mysqli_real_escape_string($con, $_GET['section_id']);
+												$course_id = mysqli_real_escape_string($con, $_GET['course_id']);
+												$name = mysqli_real_escape_string($con, $_GET['name']);
+
+												$results = mysqli_query($con,"SELECT * FROM takes natural join section natural join course WHERE computing_id = '$login_session'");
+												echo "Below is your new course schedule:";
+												echo "<table border='1'>
+												<tr>
+												<th>Section ID</th>
+												<th>Course ID</th>
+												<th>Course Name</th>
+												</tr>";
+
+												while($row = mysqli_fetch_array($results)) {
+												  echo "<tr>";
+												  echo "<td>" . $row['section_id'] . "</td>";
+												  echo "<td>" . $row['course_id'] . "</td>";
+												  echo "<td>" . $row['name'] . "</td>";
+												  echo "</tr>";
+												}
+
+												echo "</table>";
+
+												mysqli_close($con);
+
+												$validdelete = 1;
+												}
+
+												}
+
+												if ($validdelete ==0) {
+													echo "Inputted section was not in your schedule. No deletion was executed.";
+												}
+												?>
                                         </div>
                                     </div>
                         
@@ -198,3 +215,4 @@ mysqli_close($con);
     
 </body>
 </html>
+

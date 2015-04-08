@@ -39,9 +39,9 @@ if(($computing_id != "") and ($idErr != "Account does not exist") and ($password
     mysqli_query($con, "UPDATE student SET password = '$password' WHERE computing_id = '$computing_id'");
 
     $computing_id = $password = $confirm = "";
-       
+    
     if(isset($_POST['reset'])) { 
-    $message = "Your password has been reset! Please try to login now.";
+        $message = "Your password has been reset! Please try to login now.";
     }
 }
 
@@ -84,25 +84,25 @@ mysqli_close($con);
                             <a href="/~ydc5yf" class=" active"><span class="l"></span><span class="r"></span><span class="t">Home</span></a>
                         </li>
                         <li>
-                            <a href="dept.html"><span class="l"></span><span class="r"></span><span class="t">CS Department</span></a>
+                            <a href="dept.php"><span class="l"></span><span class="r"></span><span class="t">CS Department</span></a>
                             <ul>
-                                <li><a href="major.html">Major</a>
+                                <li><a href="major.php">Major</a>
                                     <ul>
-                                        <li><a href="bscs.html">Bachelor of Science</a></li>
-                                        <li><a href="bacs.html">Bachelor of Arts</a></li>
+                                        <li><a href="bscs.php">Bachelor of Science</a></li>
+                                        <li><a href="bacs.php">Bachelor of Arts</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="minor.html">Minor</a></li>
-                                <li><a href="faculty.html">Faculty</a></li>
+                                <li><a href="minor.php">Minor</a></li>
+                                <li><a href="faculty.php">Faculty</a></li>
                             </ul>
                         </li>
                         <li>
                             <a href="registry.php"><span class="l"></span><span class="r"></span><span class="t">Course Registry</span></a>
                         </li>       
                         <li>
-                            <a href="about.html"><span class="l"></span><span class="r"></span><span class="t">About</span></a>
+                            <a href="about.php"><span class="l"></span><span class="r"></span><span class="t">About</span></a>
                         </li>
-                	</ul>
+                    </ul>
                 </div>
                 <div class="art-Header">
                     <div class="art-Header-jpeg"></div>
@@ -115,127 +115,127 @@ mysqli_close($con);
                     <div class="art-content">
                         <div class="art-Post">
                             <div class="art-Post-body">
-                        <div class="art-Post-inner">
-                                        <h2 class="art-PostHeader">
-                                            Reset Your Password
-                                        </h2>
-                                        <div class="art-PostContent">
-                                            <p>Oops, it seems like you've forgotten your password. Lucky for you we can reset it for you in just a few moments! Simply input your computing id and the password you would like to use.</p>
-                                            <p><div class="form">
+                                <div class="art-Post-inner">
+                                    <h2 class="art-PostHeader">
+                                        Reset Your Password
+                                    </h2>
+                                    <div class="art-PostContent">
+                                        <p>Oops, it seems like you've forgotten your password. Lucky for you we can reset it for you in just a few moments! Simply input your computing id and the password you would like to use.</p>
+                                        <p><div class="form">
                                             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" id="register">
                                                 <table><tr>
-                                                <td><label>Computing ID</label></td>
-                                                <td><input type="text" name="computing_id" value="<?php echo htmlentities($computing_id) ?>" placeholder="ex. mst3k"><span class="error"> * <?php echo $idErr;?></span></td></tr>
-                                            <tr><td><label>Password</label></td>
-                                                <td><input type="password" name="password" value="<?php echo htmlentities($password) ?>" placeholder="ex. password"><span class="error"> * <?php echo $passErr;?></span></td></tr>
-                                                <tr><td><label>Confirm Password</label></td>
-                                                <td><input type="password" name="confirm" value="<?php echo htmlentities($confirm) ?>" placeholder="ex. password"><span class="error"> * <?php echo $conErr;?></span></td></tr></table>
-                                            <p><span class="art-button-wrapper">
-                                                    <span class="l"> </span>
-                                                    <span class="r"> </span>
-                                                    <input class="art-button" type="submit" name="reset" value="Reset Password" />
-                                                </span></p>
-                                                <p><?php echo $message; ?>
-                                            </form>
+                                                    <td><label>Computing ID</label></td>
+                                                    <td><input type="text" name="computing_id" value="<?php echo htmlentities($computing_id) ?>" placeholder="ex. mst3k"><span class="error"> * <?php echo $idErr;?></span></td></tr>
+                                                    <tr><td><label>Password</label></td>
+                                                        <td><input type="password" name="password" value="<?php echo htmlentities($password) ?>" placeholder="ex. password"><span class="error"> * <?php echo $passErr;?></span></td></tr>
+                                                        <tr><td><label>Confirm Password</label></td>
+                                                            <td><input type="password" name="confirm" value="<?php echo htmlentities($confirm) ?>" placeholder="ex. password"><span class="error"> * <?php echo $conErr;?></span></td></tr></table>
+                                                            <p><span class="art-button-wrapper">
+                                                                <span class="l"> </span>
+                                                                <span class="r"> </span>
+                                                                <input class="art-button" type="submit" name="reset" value="Reset Password" />
+                                                            </span></p>
+                                                            <p><?php echo $message; ?>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="cleared"></div>
                                             </div>
                                         </div>
                                     </div>
-                        
-                        		<div class="cleared"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="art-sidebar1">
-                        <div class="art-Block">
-                            <div class="art-Block-tl"></div>
-                            <div class="art-Block-tr"></div>
-                            <div class="art-Block-bl"></div>
-                            <div class="art-Block-br"></div>
-                            <div class="art-Block-tc"></div>
-                            <div class="art-Block-bc"></div>
-                            <div class="art-Block-cl"></div>
-                            <div class="art-Block-cr"></div>
-                            <div class="art-Block-cc"></div>
-                            <div class="art-Block-body">
-                                        <div class="art-BlockHeader">
-                                            <div class="l"></div>
-                                            <div class="r"></div>
-                                            <div class="art-header-tag-icon">
-                                                <div class="t">Login</div>
+                                    <div class="art-sidebar1">
+                                        <div class="art-Block">
+                                            <div class="art-Block-tl"></div>
+                                            <div class="art-Block-tr"></div>
+                                            <div class="art-Block-bl"></div>
+                                            <div class="art-Block-br"></div>
+                                            <div class="art-Block-tc"></div>
+                                            <div class="art-Block-bc"></div>
+                                            <div class="art-Block-cl"></div>
+                                            <div class="art-Block-cr"></div>
+                                            <div class="art-Block-cc"></div>
+                                            <div class="art-Block-body">
+                                                <div class="art-BlockHeader">
+                                                    <div class="l"></div>
+                                                    <div class="r"></div>
+                                                    <div class="art-header-tag-icon">
+                                                        <div class="t">Login</div>
+                                                    </div>
+                                                </div><div class="art-BlockContent">
+                                                <div class="art-BlockContent-body">
+                                                    <div><form class="loginform" method="post" action="">
+                                                        <table><tr>
+                                                            <td><label>Username</label></td>
+                                                            <td><input type="text" name="username" placeholder="ex. mst3k"></td></tr>
+                                                            <tr><td><label>Password</label></td>
+                                                                <td><input type="password" name="pass"></td></tr></table>
+                                                                <div align="center">
+                                                                    <p><span class="error"><?php echo $error;?></span></p>
+                                                                    <span class="art-button-wrapper">
+                                                                        <span class="l"> </span>
+                                                                        <span class="r"> </span>
+                                                                        <input class="art-button" type="submit" name="login" value="Login" />
+                                                                    </span></form>
+                                                                    <p><div class="art-Footer-text"><a href="/~ydc5yf/register.php">Register</a> | <a href="/~ydc5yf/reset.php">Reset Password</a>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                            </div>
+                                                            <div class="cleared"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="cleared"></div>
+                                                </div>
                                             </div>
-                                        </div><div class="art-BlockContent">
-                                            <div class="art-BlockContent-body">
-                                                <div><form class="loginform" method="post" action="">
-                                                    <table><tr>
-                                                <td><label>Username</label></td>
-                                                <td><input type="text" name="username" placeholder="ex. mst3k"></td></tr>
-                                                <tr><td><label>Password</label></td>
-                                                <td><input type="password" name="pass"></td></tr></table>
-                                                    <div align="center">
-                                                    <p><span class="error"><?php echo $error;?></span></p>
-                                                <span class="art-button-wrapper">
-                                                    <span class="l"> </span>
-                                                    <span class="r"> </span>
-                                                    <input class="art-button" type="submit" name="login" value="Login" />
-                                                </span></form>
-                                                <p><div class="art-Footer-text"><a href="/~ydc5yf/register.php">Register</a> | <a href="/~ydc5yf/reset.php">Reset Password</a>
+                                            <div class="art-Block">
+                                                <div class="art-Block-tl"></div>
+                                                <div class="art-Block-tr"></div>
+                                                <div class="art-Block-bl"></div>
+                                                <div class="art-Block-br"></div>
+                                                <div class="art-Block-tc"></div>
+                                                <div class="art-Block-bc"></div>
+                                                <div class="art-Block-cl"></div>
+                                                <div class="art-Block-cr"></div>
+                                                <div class="art-Block-cc"></div>
+                                                <div class="art-Block-body">
+                                                    <div class="art-BlockHeader">
+                                                        <div class="l"></div>
+                                                        <div class="r"></div>
+                                                        <div class="art-header-tag-icon">
+                                                            <div class="t">Group Info</div>
+                                                        </div>
+                                                    </div><div class="art-BlockContent">
+                                                    <div class="art-BlockContent-body">
+                                                        <div>
+                                                            <b>Yujin Cho</b> (ydc5yf)
+                                                            <br><b>Casey Cooke</b> (cjc4gz)
+                                                            <br><b>Diane Lee</b> (dl4md)
+                                                            <br><b>Xavier Palathingal</b> (xvp2he)
+                                                        </div>
+                                                        <div class="cleared"></div>
+                                                    </div>
                                                 </div>
-                                                </div>
-                                                
-                                                </div>
-                                        		<div class="cleared"></div>
-                                            </div>
-                                        </div>
-                        		<div class="cleared"></div>
-                            </div>
-                        </div>
-                        <div class="art-Block">
-                            <div class="art-Block-tl"></div>
-                            <div class="art-Block-tr"></div>
-                            <div class="art-Block-bl"></div>
-                            <div class="art-Block-br"></div>
-                            <div class="art-Block-tc"></div>
-                            <div class="art-Block-bc"></div>
-                            <div class="art-Block-cl"></div>
-                            <div class="art-Block-cr"></div>
-                            <div class="art-Block-cc"></div>
-                            <div class="art-Block-body">
-                                        <div class="art-BlockHeader">
-                                            <div class="l"></div>
-                                            <div class="r"></div>
-                                            <div class="art-header-tag-icon">
-                                                <div class="t">Group Info</div>
-                                            </div>
-                                        </div><div class="art-BlockContent">
-                                            <div class="art-BlockContent-body">
-                                                <div>
-                                                <b>Yujin Cho</b> (ydc5yf)
-                                                <br><b>Casey Cooke</b> (cjc4gz)
-                                                <br><b>Diane Lee</b> (dl4md)
-                                                <br><b>Xavier Palathingal</b> (xvp2he)
-                                                </div>
-                                        		<div class="cleared"></div>
+                                                <div class="cleared"></div>
                                             </div>
                                         </div>
-                        		<div class="cleared"></div>
+                                    </div>
+                                </div>
+                                <div class="cleared"></div><div class="art-Footer">
+                                <div class="art-Footer-inner">
+                                    <div class="art-Footer-text">
+                                        <p>CS 4750 Database Systems (Spring 2015, Basit)</p>
+                                    </div>
+                                </div>
+                                <div class="art-Footer-background"></div>
                             </div>
+                            <div class="cleared"></div>
                         </div>
                     </div>
+                    <div class="cleared"></div>
+                    <p class="art-page-footer"><a href="http://webjestic.net/templates">CSS Template</a> created by <a href="http://webjestic.net">webJestic</a></p>
                 </div>
-                <div class="cleared"></div><div class="art-Footer">
-                    <div class="art-Footer-inner">
-                        <div class="art-Footer-text">
-                            <p>CS 4750 Database Systems (Spring 2015, Basit)</p>
-                        </div>
-                    </div>
-                    <div class="art-Footer-background"></div>
-                </div>
-        		<div class="cleared"></div>
-            </div>
-        </div>
-        <div class="cleared"></div>
-        <p class="art-page-footer"><a href="http://webjestic.net/templates">CSS Template</a> created by <a href="http://webjestic.net">webJestic</a></p>
-    </div>
-    
-</body>
-</html>
+                
+            </body>
+            </html>

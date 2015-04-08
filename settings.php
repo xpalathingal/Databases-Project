@@ -8,7 +8,7 @@ if(!isset($_SESSION['login_user'])) {
 
 $con = mysqli_connect("stardock.cs.virginia.edu", "cs4750ydc5yf", "yujin", "cs4750ydc5yf");
 // Check connection
-if (mysqli_connect_errno()) {
+if(mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
 
@@ -109,15 +109,15 @@ mysqli_close($con);
                             <a href="/~ydc5yf" class=" active"><span class="l"></span><span class="r"></span><span class="t">Home</span></a>
                         </li>
                         <li>
-                            <a href="dept.html"><span class="l"></span><span class="r"></span><span class="t">CS Department</span></a>
+                            <a href="dept.php"><span class="l"></span><span class="r"></span><span class="t">CS Department</span></a>
                             <ul>
-                                <li><a href="major.html">Major</a>
+                                <li><a href="major.php">Major</a>
                                     <ul>
-                                        <li><a href="bscs.html">Bachelor of Science</a></li>
-                                        <li><a href="bacs.html">Bachelor of Arts</a></li>
+                                        <li><a href="bscs.php">Bachelor of Science</a></li>
+                                        <li><a href="bacs.php">Bachelor of Arts</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="minor.html">Minor</a></li>
+                                <li><a href="minor.php">Minor</a></li>
                                 <li><a href="faculty.php">Faculty</a></li>
                             </ul>
                         </li>
@@ -125,7 +125,7 @@ mysqli_close($con);
                             <a href="registry.php"><span class="l"></span><span class="r"></span><span class="t">Course Registry</span></a>
                         </li>       
                         <li>
-                            <a href="about.html"><span class="l"></span><span class="r"></span><span class="t">About</span></a>
+                            <a href="about.php"><span class="l"></span><span class="r"></span><span class="t">About</span></a>
                         </li>
                     </ul>
                 </div>
@@ -140,122 +140,122 @@ mysqli_close($con);
                     <div class="art-content">
                         <div class="art-Post">
                             <div class="art-Post-body">
-                        <div class="art-Post-inner">
-                                        <h2 class="art-PostHeader">
-                                            Settings
-                                        </h2>
-                                        <div class="art-PostContent">
-                                            <p>Here you can update your name, year, major, and password as necessary.</p>
-                                            <p><div class="form">
+                                <div class="art-Post-inner">
+                                    <h2 class="art-PostHeader">
+                                        Settings
+                                    </h2>
+                                    <div class="art-PostContent">
+                                        <p>Here you can update your name, year, major, and password as necessary.</p>
+                                        <p><div class="form">
                                             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" id="update">
                                                 <table><tr>
-                                                <td><label>First Name</label></td>
-                                                <td><input type="text" name="first_name" value="<?php echo htmlentities($first_name) ?>" placeholder="ex. Bob"></td></tr>
-                                            <tr><td><label>Last Name</label></td>
-                                                <td><input type="text" name="last_name" value="<?php echo htmlentities($last_name) ?>" placeholder="ex. Kim"></td></tr>
-                                            <tr><td><label>Year</label></td>
-                                                <td><input type="text" name="year" value="<?php echo htmlentities($year) ?>" placeholder="ex. 2015"><span class="error"> <?php echo $yearErr;?></span></td></tr>
-                                            <tr><td><label>Major</label></td>
-                                                <td><input type="text" name="major" value="<?php echo htmlentities($major) ?>" placeholder="ex. BACS"><span class="error"> <?php echo $majErr;?></span></td></tr>
-                                            <tr><td><label>Password</label></td>
-                                                <td><input type="password" name="password" value="<?php echo htmlentities($password) ?>" placeholder="ex. password"></td></tr>
-                                            <tr><td><label>Confirm Password</label></td>
-                                                <td><input type="password" name="confirm" value="<?php echo htmlentities($confirm) ?>" placeholder="ex. password"><span class="error"> <?php echo $conErr;?></span></td></tr></table>
-                                            <p><span class="art-button-wrapper">
-                                                    <span class="l"> </span>
-                                                    <span class="r"> </span>
-                                                    <input class="art-button" type="submit" name="update" value="Update" />
-                                                </span></p>
-                                                <p><?php echo $message; ?>
-                                            </form>
+                                                    <td><label>First Name</label></td>
+                                                    <td><input type="text" name="first_name" value="<?php echo htmlentities($first_name) ?>" placeholder="ex. Bob"></td></tr>
+                                                    <tr><td><label>Last Name</label></td>
+                                                        <td><input type="text" name="last_name" value="<?php echo htmlentities($last_name) ?>" placeholder="ex. Kim"></td></tr>
+                                                        <tr><td><label>Year</label></td>
+                                                            <td><input type="text" name="year" value="<?php echo htmlentities($year) ?>" placeholder="ex. 2015"><span class="error"> <?php echo $yearErr;?></span></td></tr>
+                                                            <tr><td><label>Major</label></td>
+                                                                <td><input type="text" name="major" value="<?php echo htmlentities($major) ?>" placeholder="ex. BACS"><span class="error"> <?php echo $majErr;?></span></td></tr>
+                                                                <tr><td><label>Password</label></td>
+                                                                    <td><input type="password" name="password" value="<?php echo htmlentities($password) ?>" placeholder="ex. password"></td></tr>
+                                                                    <tr><td><label>Confirm Password</label></td>
+                                                                        <td><input type="password" name="confirm" value="<?php echo htmlentities($confirm) ?>" placeholder="ex. password"><span class="error"> <?php echo $conErr;?></span></td></tr></table>
+                                                                        <p><span class="art-button-wrapper">
+                                                                            <span class="l"> </span>
+                                                                            <span class="r"> </span>
+                                                                            <input class="art-button" type="submit" name="update" value="Update" />
+                                                                        </span></p>
+                                                                        <p><?php echo $message; ?>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="cleared"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="art-sidebar1">
+                                                    <div class="art-Block">
+                                                        <div class="art-Block-tl"></div>
+                                                        <div class="art-Block-tr"></div>
+                                                        <div class="art-Block-bl"></div>
+                                                        <div class="art-Block-br"></div>
+                                                        <div class="art-Block-tc"></div>
+                                                        <div class="art-Block-bc"></div>
+                                                        <div class="art-Block-cl"></div>
+                                                        <div class="art-Block-cr"></div>
+                                                        <div class="art-Block-cc"></div>
+                                                        <div class="art-Block-body">
+                                                            <div class="art-BlockHeader">
+                                                                <div class="l"></div>
+                                                                <div class="r"></div>
+                                                                <div class="art-header-tag-icon">
+                                                                    <div class="t">Welcome back!</div>
+                                                                </div>
+                                                            </div><div class="art-BlockContent">
+                                                            <div class="art-BlockContent-body">
+                                                                <div align="center">Hello there, <?php echo $name; ?>.
+                                                                    <br><br><a href="schedule.php">My Schedule</a>
+                                                                    <br><a href="history.php">Course History</a>
+                                                                    <br><a href="checklist.php">Course Checklist</a>
+                                                                    <br><a href="settings.php">Settings</a>
+                                                                    <br><a href="logout.php">Log Out</a>
+                                                                </div>
+                                                                <div class="cleared"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="cleared"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="art-Block">
+                                                    <div class="art-Block-tl"></div>
+                                                    <div class="art-Block-tr"></div>
+                                                    <div class="art-Block-bl"></div>
+                                                    <div class="art-Block-br"></div>
+                                                    <div class="art-Block-tc"></div>
+                                                    <div class="art-Block-bc"></div>
+                                                    <div class="art-Block-cl"></div>
+                                                    <div class="art-Block-cr"></div>
+                                                    <div class="art-Block-cc"></div>
+                                                    <div class="art-Block-body">
+                                                        <div class="art-BlockHeader">
+                                                            <div class="l"></div>
+                                                            <div class="r"></div>
+                                                            <div class="art-header-tag-icon">
+                                                                <div class="t">Group Info</div>
+                                                            </div>
+                                                        </div><div class="art-BlockContent">
+                                                        <div class="art-BlockContent-body">
+                                                            <div>
+                                                                <b>Yujin Cho</b> (ydc5yf)
+                                                                <br><b>Casey Cooke</b> (cjc4gz)
+                                                                <br><b>Diane Lee</b> (dl4md)
+                                                                <br><b>Xavier Palathingal</b> (xvp2he)
+                                                            </div>
+                                                            <div class="cleared"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="cleared"></div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                        
-                                <div class="cleared"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="art-sidebar1">
-                        <div class="art-Block">
-                            <div class="art-Block-tl"></div>
-                            <div class="art-Block-tr"></div>
-                            <div class="art-Block-bl"></div>
-                            <div class="art-Block-br"></div>
-                            <div class="art-Block-tc"></div>
-                            <div class="art-Block-bc"></div>
-                            <div class="art-Block-cl"></div>
-                            <div class="art-Block-cr"></div>
-                            <div class="art-Block-cc"></div>
-                            <div class="art-Block-body">
-                                        <div class="art-BlockHeader">
-                                            <div class="l"></div>
-                                            <div class="r"></div>
-                                            <div class="art-header-tag-icon">
-                                                <div class="t">Welcome back!</div>
-                                            </div>
-                                        </div><div class="art-BlockContent">
-                                            <div class="art-BlockContent-body">
-                                            <div align="center">Hello there, <?php echo $name; ?>.
-                                                <br><br><a href="schedule.php">My Schedule</a>
-                                                <br><a href="history.php">Course History</a>
-                                                <br><a href="checklist.php">Course Checklist</a>
-                                                <br><a href="settings.php">Settings</a>
-                                                <br><a href="logout.php">Log Out</a>
-                                            </div>
-                                                <div class="cleared"></div>
-                                            </div>
+                                    <div class="cleared"></div><div class="art-Footer">
+                                    <div class="art-Footer-inner">
+                                        <div class="art-Footer-text">
+                                            <p>CS 4750 Database Systems (Spring 2015, Basit)</p>
                                         </div>
+                                    </div>
+                                    <div class="art-Footer-background"></div>
+                                </div>
                                 <div class="cleared"></div>
                             </div>
                         </div>
-                        <div class="art-Block">
-                            <div class="art-Block-tl"></div>
-                            <div class="art-Block-tr"></div>
-                            <div class="art-Block-bl"></div>
-                            <div class="art-Block-br"></div>
-                            <div class="art-Block-tc"></div>
-                            <div class="art-Block-bc"></div>
-                            <div class="art-Block-cl"></div>
-                            <div class="art-Block-cr"></div>
-                            <div class="art-Block-cc"></div>
-                            <div class="art-Block-body">
-                                        <div class="art-BlockHeader">
-                                            <div class="l"></div>
-                                            <div class="r"></div>
-                                            <div class="art-header-tag-icon">
-                                                <div class="t">Group Info</div>
-                                            </div>
-                                        </div><div class="art-BlockContent">
-                                            <div class="art-BlockContent-body">
-                                                <div>
-                                                <b>Yujin Cho</b> (ydc5yf)
-                                                <br><b>Casey Cooke</b> (cjc4gz)
-                                                <br><b>Diane Lee</b> (dl4md)
-                                                <br><b>Xavier Palathingal</b> (xvp2he)
-                                                </div>
-                                                <div class="cleared"></div>
-                                            </div>
-                                        </div>
-                                <div class="cleared"></div>
-                            </div>
-                        </div>
+                        <div class="cleared"></div>
+                        <p class="art-page-footer"><a href="http://webjestic.net/templates">CSS Template</a> created by <a href="http://webjestic.net">webJestic</a></p>
                     </div>
-                </div>
-                <div class="cleared"></div><div class="art-Footer">
-                    <div class="art-Footer-inner">
-                        <div class="art-Footer-text">
-                            <p>CS 4750 Database Systems (Spring 2015, Basit)</p>
-                        </div>
-                    </div>
-                    <div class="art-Footer-background"></div>
-                </div>
-                <div class="cleared"></div>
-            </div>
-        </div>
-        <div class="cleared"></div>
-        <p class="art-page-footer"><a href="http://webjestic.net/templates">CSS Template</a> created by <a href="http://webjestic.net">webJestic</a></p>
-    </div>
-    
-</body>
-</html>
+
+                </body>
+                </html>

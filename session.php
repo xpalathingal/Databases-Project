@@ -3,7 +3,7 @@
 $con = mysqli_connect("stardock.cs.virginia.edu", "cs4750ydc5yf", "yujin", "cs4750ydc5yf");
 // Check connection
 if(mysqli_connect_errno()) {
-  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+	echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
 session_start(); // Starting Session
 $user_check = $_SESSION['login_user']; // Storing Session

@@ -41,15 +41,15 @@ if(isset($_SESSION['login_user'])) {
                             <a href="/~ydc5yf" class=" active"><span class="l"></span><span class="r"></span><span class="t">Home</span></a>
                         </li>
                         <li>
-                            <a href="dept.html"><span class="l"></span><span class="r"></span><span class="t">CS Department</span></a>
+                            <a href="dept.php"><span class="l"></span><span class="r"></span><span class="t">CS Department</span></a>
                             <ul>
-                                <li><a href="major.html">Major</a>
+                                <li><a href="major.php">Major</a>
                                     <ul>
-                                        <li><a href="bscs.html">Bachelor of Science</a></li>
-                                        <li><a href="bacs.html">Bachelor of Arts</a></li>
+                                        <li><a href="bscs.php">Bachelor of Science</a></li>
+                                        <li><a href="bacs.php">Bachelor of Arts</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="minor.html">Minor</a></li>
+                                <li><a href="minor.php">Minor</a></li>
                                 <li><a href="faculty.php">Faculty</a></li>
                             </ul>
                         </li>
@@ -57,9 +57,9 @@ if(isset($_SESSION['login_user'])) {
                             <a href="registry.php"><span class="l"></span><span class="r"></span><span class="t">Course Registry</span></a>
                         </li>       
                         <li>
-                            <a href="about.html"><span class="l"></span><span class="r"></span><span class="t">About</span></a>
+                            <a href="about.php"><span class="l"></span><span class="r"></span><span class="t">About</span></a>
                         </li>
-                	</ul>
+                    </ul>
                 </div>
                 <div class="art-Header">
                     <div class="art-Header-jpeg"></div>
@@ -72,16 +72,16 @@ if(isset($_SESSION['login_user'])) {
                     <div class="art-content">
                         <div class="art-Post">
                             <div class="art-Post-body">
-                        <div class="art-Post-inner">
-                                        <h2 class="art-PostHeader">
-                                            Welcome
-                                        </h2>
-                                        <div class="art-PostContent">
-                                            <p>Congratulations on deciding to be a Computer Science major! Whether your parents gave you no choice in the matter or you filled out your major declaration form drunk, the CompSci Buddy has your back. After adding yourself to the system, you'll be able to keep track of anything and everything related to the CS major. You can view all the requirements and see which ones you still need to fulfill, search through the course offerings, read/write reviews for classes and professors, and build the perfect schedule around a three day weekend. What are you waiting for, give it a try!</p>
-                                        </div>
+                                <div class="art-Post-inner">
+                                    <h2 class="art-PostHeader">
+                                        Welcome
+                                    </h2>
+                                    <div class="art-PostContent">
+                                        <p>Congratulations on deciding to be a Computer Science major! Whether your parents gave you no choice in the matter or you filled out your major declaration form drunk, the CompSci Buddy has your back. After adding yourself to the system, you'll be able to keep track of anything and everything related to the CS major. You can view all the requirements and see which ones you still need to fulfill, search through the course offerings, read/write reviews for classes and professors, and build the perfect schedule around a three day weekend. What are you waiting for, give it a try!</p>
                                     </div>
-                        
-                        		<div class="cleared"></div>
+                                </div>
+                                
+                                <div class="cleared"></div>
                             </div>
                         </div>
                     </div>
@@ -97,85 +97,85 @@ if(isset($_SESSION['login_user'])) {
                             <div class="art-Block-cr"></div>
                             <div class="art-Block-cc"></div>
                             <div class="art-Block-body">
-                                        <div class="art-BlockHeader">
-                                            <div class="l"></div>
-                                            <div class="r"></div>
-                                            <div class="art-header-tag-icon">
-                                                <div class="t">Login</div>
-                                            </div>
-                                        </div><div class="art-BlockContent">
-                                            <div class="art-BlockContent-body">
-                                                <div><form class="loginform" method="post" action="">
-                                                    <table><tr>
-                                                <td><label>Username</label></td>
-                                                <td><input type="text" name="username" placeholder="ex. mst3k"></td></tr>
-                                                <tr><td><label>Password</label></td>
+                                <div class="art-BlockHeader">
+                                    <div class="l"></div>
+                                    <div class="r"></div>
+                                    <div class="art-header-tag-icon">
+                                        <div class="t">Login</div>
+                                    </div>
+                                </div><div class="art-BlockContent">
+                                <div class="art-BlockContent-body">
+                                    <div><form class="loginform" method="post" action="">
+                                        <table><tr>
+                                            <td><label>Username</label></td>
+                                            <td><input type="text" name="username" placeholder="ex. mst3k"></td></tr>
+                                            <tr><td><label>Password</label></td>
                                                 <td><input type="password" name="pass"></td></tr></table>
-                                                    <div align="center">
+                                                <div align="center">
                                                     <p><span class="error"><?php echo $error;?></span></p>
-                                                <span class="art-button-wrapper">
-                                                    <span class="l"> </span>
-                                                    <span class="r"> </span>
-                                                    <input class="art-button" type="submit" name="login" value="Login" />
-                                                </span></form>
-                                                <p><div class="art-Footer-text"><a href="/~ydc5yf/register.php">Register</a> | <a href="/~ydc5yf/reset.php">Reset Password</a>
-                                                </div>
+                                                    <span class="art-button-wrapper">
+                                                        <span class="l"> </span>
+                                                        <span class="r"> </span>
+                                                        <input class="art-button" type="submit" name="login" value="Login" />
+                                                    </span></form>
+                                                    <p><div class="art-Footer-text"><a href="/~ydc5yf/register.php">Register</a> | <a href="/~ydc5yf/reset.php">Reset Password</a>
+                                                    </div>
                                                 </div>
                                                 
-                                                </div>
-                                        		<div class="cleared"></div>
                                             </div>
+                                            <div class="cleared"></div>
                                         </div>
-                        		<div class="cleared"></div>
+                                    </div>
+                                    <div class="cleared"></div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="art-Block">
-                            <div class="art-Block-tl"></div>
-                            <div class="art-Block-tr"></div>
-                            <div class="art-Block-bl"></div>
-                            <div class="art-Block-br"></div>
-                            <div class="art-Block-tc"></div>
-                            <div class="art-Block-bc"></div>
-                            <div class="art-Block-cl"></div>
-                            <div class="art-Block-cr"></div>
-                            <div class="art-Block-cc"></div>
-                            <div class="art-Block-body">
-                                        <div class="art-BlockHeader">
-                                            <div class="l"></div>
-                                            <div class="r"></div>
-                                            <div class="art-header-tag-icon">
-                                                <div class="t">Group Info</div>
-                                            </div>
-                                        </div><div class="art-BlockContent">
-                                            <div class="art-BlockContent-body">
-                                                <div>
-                                                <b>Yujin Cho</b> (ydc5yf)
-                                                <br><b>Casey Cooke</b> (cjc4gz)
-                                                <br><b>Diane Lee</b> (dl4md)
-                                                <br><b>Xavier Palathingal</b> (xvp2he)
-                                                </div>
-                                        		<div class="cleared"></div>
-                                            </div>
+                            <div class="art-Block">
+                                <div class="art-Block-tl"></div>
+                                <div class="art-Block-tr"></div>
+                                <div class="art-Block-bl"></div>
+                                <div class="art-Block-br"></div>
+                                <div class="art-Block-tc"></div>
+                                <div class="art-Block-bc"></div>
+                                <div class="art-Block-cl"></div>
+                                <div class="art-Block-cr"></div>
+                                <div class="art-Block-cc"></div>
+                                <div class="art-Block-body">
+                                    <div class="art-BlockHeader">
+                                        <div class="l"></div>
+                                        <div class="r"></div>
+                                        <div class="art-header-tag-icon">
+                                            <div class="t">Group Info</div>
                                         </div>
-                        		<div class="cleared"></div>
+                                    </div><div class="art-BlockContent">
+                                    <div class="art-BlockContent-body">
+                                        <div>
+                                            <b>Yujin Cho</b> (ydc5yf)
+                                            <br><b>Casey Cooke</b> (cjc4gz)
+                                            <br><b>Diane Lee</b> (dl4md)
+                                            <br><b>Xavier Palathingal</b> (xvp2he)
+                                        </div>
+                                        <div class="cleared"></div>
+                                    </div>
+                                </div>
+                                <div class="cleared"></div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="cleared"></div><div class="art-Footer">
-                    <div class="art-Footer-inner">
-                        <div class="art-Footer-text">
-                            <p>CS 4750 Database Systems (Spring 2015, Basit)</p>
-                        </div>
+                <div class="art-Footer-inner">
+                    <div class="art-Footer-text">
+                        <p>CS 4750 Database Systems (Spring 2015, Basit)</p>
                     </div>
-                    <div class="art-Footer-background"></div>
                 </div>
-        		<div class="cleared"></div>
+                <div class="art-Footer-background"></div>
             </div>
+            <div class="cleared"></div>
         </div>
-        <div class="cleared"></div>
-        <p class="art-page-footer"><a href="http://webjestic.net/templates">CSS Template</a> created by <a href="http://webjestic.net">webJestic</a></p>
     </div>
-    
+    <div class="cleared"></div>
+    <p class="art-page-footer"><a href="http://webjestic.net/templates">CSS Template</a> created by <a href="http://webjestic.net">webJestic</a></p>
+</div>
+
 </body>
 </html>
