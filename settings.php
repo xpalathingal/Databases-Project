@@ -1,6 +1,6 @@
 <?php
 include('login.php'); // Includes Login Script
-include('session.php');
+//include('session.php');
 
 if(!isset($_SESSION['login_user'])) {
     header("location: index.php");
@@ -11,6 +11,12 @@ $con = mysqli_connect("stardock.cs.virginia.edu", "cs4750ydc5yf", "yujin", "cs47
 if(mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
+
+$person = $_SESSION['login_user'];
+$query = "SELECT * FROM student WHERE computing_id = '$person'";
+$res = mysqli_query($con, $query);
+$row = mysqli_fetch_assoc($res);
+$greet = $row['first_name'];
 
 $computing_id = mysqli_real_escape_string($con, $_SESSION['login_user']);
 $first_name = mysqli_real_escape_string($con, $_POST['first_name']);
@@ -196,7 +202,7 @@ mysqli_close($con);
                                                                 </div>
                                                             </div><div class="art-BlockContent">
                                                             <div class="art-BlockContent-body">
-                                                                <div align="center">Hello there, <?php echo $name; ?>.
+                                                                <div align="center">Hello there, <?php echo $greet; ?>.
                                                                     <br><br><a href="schedule.php">My Schedule</a>
                                                                     <br><a href="history.php">Course History</a>
                                                                     <br><a href="checklist.php">Course Checklist</a>

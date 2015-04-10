@@ -1,17 +1,17 @@
 <?php
 include('session.php');
-$con=mysqli_connect("stardock.cs.virginia.edu","cs4750ydc5yf","yujin","cs4750ydc5yf");
+
+$con= mysqli_connect("stardock.cs.virginia.edu", "cs4750ydc5yf", "yujin", "cs4750ydc5yf");
 // Check connection
-if (mysqli_connect_errno()) {
+if(mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
 
 $sec_id = $_GET['sec_id'];
-
 $validdelete = 0;
-
 $takeslist = mysqli_query($con,"SELECT section_id FROM takes WHERE computing_id = '$login_session'");
 
+mysqli_close($con);
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -152,7 +152,7 @@ $takeslist = mysqli_query($con,"SELECT section_id FROM takes WHERE computing_id 
                                             </div>
                                         </div><div class="art-BlockContent">
                                             <div class="art-BlockContent-body">
-                                            <div align="center">Hello there, <?php echo $name; ?>.
+                                            <div align="center">Hello there, <?php echo $greet; ?>.
                                                 <br><br><a href="schedule.php">My Schedule</a>
                                                 <br><a href="history.php">Course History</a>
                                                 <br><a href="checklist.php">Course Checklist</a>

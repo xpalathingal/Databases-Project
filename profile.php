@@ -102,7 +102,7 @@ include('session.php');
                                     </div>
                                 </div><div class="art-BlockContent">
                                 <div class="art-BlockContent-body">
-                                    <div align="center">Hello there, <?php echo $name; ?>.
+                                    <div align="center">Hello there, <?php echo $greet; ?>.
                                         <br><br><a href="schedule.php">My Schedule</a>
                                         <br><a href="history.php">Course History</a>
                                         <br><a href="checklist.php">Course Checklist</a>

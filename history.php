@@ -1,5 +1,25 @@
 <?php
 include('session.php');
+
+$con = mysqli_connect("stardock.cs.virginia.edu", "cs4750ydc5yf", "yujin", "cs4750ydc5yf");
+        // Check connection
+if(mysqli_connect_errno()) {
+  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+}
+
+$department = mysqli_real_escape_string($con, $_GET['department']);
+$course_id = mysqli_real_escape_string($con, $_GET['course_id']);
+$name = mysqli_real_escape_string($con, $_GET['name']);
+$semester = mysqli_real_escape_string($con, $_GET['semester']);
+$year = mysqli_real_escape_string($con, $_GET['year']);
+$results = mysqli_query($con, "SELECT course.department, course.course_id, course.name, 
+section.semester, section.year
+FROM course LEFT OUTER JOIN section on course.course_id = section.course_id 
+LEFT OUTER JOIN takes on section.section_id = takes.section_id 
+LEFT OUTER JOIN student on takes.computing_id = student.computing_id 
+WHERE takes.computing_id = '$login_session' AND section.year + section.semester < '2017' ");
+
+mysqli_close($con);
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -30,10 +50,10 @@ include('session.php');
             <div class="art-Sheet-cc"></div>
             <div class="art-Sheet-body">
                 <div class="art-nav">
-                	<div class="l"></div>
-                	<div class="r"></div>
-                	<ul class="art-menu">
-                		<li>
+                    <div class="l"></div>
+                    <div class="r"></div>
+                    <ul class="art-menu">
+                        <li>
                             <a href="/~ydc5yf" class=" active"><span class="l"></span><span class="r"></span><span class="t">Home</span></a>
                         </li>
                         <li>
@@ -55,7 +75,7 @@ include('session.php');
                         <li>
                             <a href="about.php"><span class="l"></span><span class="r"></span><span class="t">About</span></a>
                         </li>
-                	</ul>
+                    </ul>
                 </div>
                 <div class="art-Header">
                     <div class="art-Header-jpeg"></div>
@@ -73,11 +93,30 @@ include('session.php');
                                             Course History
                                         </h2>
                                         <div class="art-PostContent">
-                                            THIS IS WHERE PEOPLE CAN VIEW ALL THE COURSES THEY'VE TAKEN IN THE PAST?</p>
+                                        <?php
+                                            echo "<table border='1'>
+                                            <tr>
+                                            <th>Course</th>
+                                            <th>Name</th>
+                                            <th>Semester Taken</th>
+                                            </tr>";
+                                            while($row = mysqli_fetch_array($results)) {
+                                            echo "<tr>";
+                                            echo "<td>" . $row['department']. " " . $row['course_id'] . "</td>";
+                                            echo "<td>" . $row['name'] . "</td>";
+                                            if ($semester == 1) {
+                                                echo "<td>" . "Spring " . $row['year'] . "</td>";
+                                            } else {
+                                                echo "<td>" . "Fall " . $row['year'] . "</td>";
+                                            }
+                                            echo "</tr>";
+                                            }
+                                            echo "</table>";
+                                            ?>
                                         </div>
                                     </div>
                         
-                        		<div class="cleared"></div>
+                                <div class="cleared"></div>
                             </div>
                         </div>
                     </div>
@@ -101,17 +140,17 @@ include('session.php');
                                             </div>
                                         </div><div class="art-BlockContent">
                                             <div class="art-BlockContent-body">
-                                            <div align="center">Hello there, <?php echo $name; ?>.
+                                            <div align="center">Hello there, <?php echo $greet; ?>.
                                                 <br><br><a href="schedule.php">My Schedule</a>
                                                 <br><a href="history.php">Course History</a>
                                                 <br><a href="checklist.php">Course Checklist</a>
                                                 <br><a href="settings.php">Settings</a>
-										        <br><a href="logout.php">Log Out</a>
+                                                <br><a href="logout.php">Log Out</a>
                                             </div>
-                                        		<div class="cleared"></div>
+                                                <div class="cleared"></div>
                                             </div>
                                         </div>
-                        		<div class="cleared"></div>
+                                <div class="cleared"></div>
                             </div>
                         </div>
                         <div class="art-Block">
@@ -139,10 +178,10 @@ include('session.php');
                                                 <br><b>Diane Lee</b> (dl4md)
                                                 <br><b>Xavier Palathingal</b> (xvp2he)
                                                 </div>
-                                        		<div class="cleared"></div>
+                                                <div class="cleared"></div>
                                             </div>
                                         </div>
-                        		<div class="cleared"></div>
+                                <div class="cleared"></div>
                             </div>
                         </div>
                     </div>
@@ -155,7 +194,7 @@ include('session.php');
                     </div>
                     <div class="art-Footer-background"></div>
                 </div>
-        		<div class="cleared"></div>
+                <div class="cleared"></div>
             </div>
         </div>
         <div class="cleared"></div>

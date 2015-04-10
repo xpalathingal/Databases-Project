@@ -12,7 +12,7 @@ $query = "SELECT * FROM student WHERE computing_id = '$user_check'";
 $res = mysqli_query($con, $query);
 $row = mysqli_fetch_assoc($res);
 $login_session = $row['computing_id'];
-$name = $row['first_name'];
+$greet = $row['first_name'];
 if(!isset($login_session)) {
 	mysql_close($con); // Closing Connection
 	header('Location: index.php'); // Redirecting To Home Page
