@@ -17,7 +17,8 @@ section.semester, section.year
 FROM course LEFT OUTER JOIN section on course.course_id = section.course_id 
 LEFT OUTER JOIN takes on section.section_id = takes.section_id 
 LEFT OUTER JOIN student on takes.computing_id = student.computing_id 
-WHERE takes.computing_id = '$login_session' AND section.year + section.semester < '2017' ");
+WHERE takes.computing_id = '$login_session' AND section.year + section.semester < '2017' 
+ORDER BY section.year + section.semester ASC");
 
 mysqli_close($con);
 ?>

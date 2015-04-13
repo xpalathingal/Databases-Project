@@ -13,6 +13,7 @@ $res = mysqli_query($con, $query);
 $row = mysqli_fetch_assoc($res);
 $greet = $row['first_name'];
 
+$section_id = mysqli_real_escape_string($con, $_GET['section_id']);
 $department = mysqli_real_escape_string($con, $_GET['department']);
 $course_id = mysqli_real_escape_string($con, $_GET['course_id']);
 $name = mysqli_real_escape_string($con, $_GET['name']);
@@ -109,6 +110,7 @@ mysqli_close($con);
                                         <th>Name</th>
                                         <th>Location</th>
                                         <th>Time</th>
+                                        <th>Section</th>
                                         </tr>";
                                         while($row = mysqli_fetch_array($results)) {
                                             echo "<tr>";
@@ -116,6 +118,7 @@ mysqli_close($con);
                                             echo "<td>" . $row['name'] . "</td>";
                                             echo "<td>" . $row['building']. " " . $row['room_number'] . "</td>";
                                             echo "<td>" . $row['days']. " " . $row['start_time']. "-" . $row['end_time'] . "</td>";
+                                            echo "<td>" . $row['section_id'] . "</td>";
                                             echo "</tr>";
                                         }
                                         echo "</table>";
