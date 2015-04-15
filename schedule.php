@@ -11,7 +11,8 @@ $section_id = mysqli_real_escape_string($con, $_GET['section_id']);
 $course_id = mysqli_real_escape_string($con, $_GET['course_id']);
 $name = mysqli_real_escape_string($con, $_GET['name']);
 
-$results = mysqli_query($con,"SELECT * FROM takes natural join section natural join course WHERE computing_id = '$login_session'");
+$results = mysqli_query($con,"SELECT * FROM takes natural join section natural join course
+ WHERE computing_id = '$login_session'AND semester = 2 AND year = 2015");
 
 mysqli_close($con);
 ?>
