@@ -1,24 +1,10 @@
 <?php
 include('session.php');
 
-$con = mysqli_connect("stardock.cs.virginia.edu", "cs4750ydc5yf", "yujin", "cs4750ydc5yf");
-// Check connection
-if (mysqli_connect_errno()) {
-  echo "Failed to connect to MySQL: " . mysqli_connect_error();
-}
-
-if($_SESSION['user_role'] !== "student") {
+if($_SESSION['user_role'] !== "instructor") {
     mysql_close($con); // Closing Connection
     header('Location: index.php'); // Redirecting To Home Page
 }
-
-$section_id = mysqli_real_escape_string($con, $_GET['section_id']);
-$course_id = mysqli_real_escape_string($con, $_GET['course_id']);
-$name = mysqli_real_escape_string($con, $_GET['name']);
-
-$results = mysqli_query($con,"SELECT * FROM takes natural join section natural join course WHERE computing_id = '$login_session'");
-
-mysqli_close($con);
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -89,45 +75,14 @@ mysqli_close($con);
                             <div class="art-Post-body">
                                 <div class="art-Post-inner">
                                     <h2 class="art-PostHeader">
-                                        My Schedule
+                                        Instructor Home
                                     </h2>
                                     <div class="art-PostContent">
-                                        <?php
-                                        echo "<table border='1'>
-                                        <tr>
-                                        <th>Section ID</th>
-                                        <th>Course ID</th>
-                                        <th>Course Name</th>
-                                        </tr>";
-
-                                        while($row = mysqli_fetch_array($results)) {
-                                          echo "<tr>";
-                                          echo "<td>" . $row['section_id'] . "</td>";
-                                          echo "<td>" . $row['course_id'] . "</td>";
-                                          echo "<td>" . $row['name'] . "</td>";
-                                          echo "</tr>";
-                                      }
-
-                                      echo "</table>";
-
-                                      ?>
-
-                                      <p>Do you want to add a class to current class schedule?</p>
-
-                                      <form action="addclass.php" method="GET">
-
-                                        Section ID: <input type="text" name="sec_id"><br>
-                                        <input type="submit" value = "Add Class">
-                                    </form>
-
-                                    <p>Do you want to delete a class from your current class schedule?</p>
-                                    <form action="deleteclass.php" method="GET">
-
-                                        Section ID: <input type="text" name="sec_id"><br>
-                                        <input type="submit" value = "Delete Class">
+                                        THIS IS YOUR PERSONAL HOMEPAGE
+                                        <p>USE THE RIGHT HAND NAVIGATION PANEL TO MANAGE THE CLASSES YOU TEACH, MANAGE YOUR STUDENTS, UPDATE YOUR PERSONAL INFORMATION, ETC.</p>
                                     </div>
                                 </div>
-
+                                
                                 <div class="cleared"></div>
                             </div>
                         </div>
@@ -153,10 +108,9 @@ mysqli_close($con);
                                 </div><div class="art-BlockContent">
                                 <div class="art-BlockContent-body">
                                     <div align="center">Hello there, <?php echo $greet; ?>.
-                                        <br><br><a href="schedule.php">My Schedule</a>
-                                        <br><a href="history.php">Course History</a>
-                                        <br><a href="checklist.php">Course Checklist</a>
-                                        <br><a href="settings.php">Settings</a>
+                                        <br><br><a href="manageclasses.php">Manage Classes</a>
+                                        <br><a href="managestudents.php">Manage Students</a>
+                                        <br><a href="instrsettings.php">Settings</a>
                                         <br><a href="logout.php">Log Out</a>
                                     </div>
                                     <div class="cleared"></div>
@@ -211,7 +165,6 @@ mysqli_close($con);
 </div>
 <div class="cleared"></div>
 <p class="art-page-footer"><a href="http://webjestic.net/templates">CSS Template</a> created by <a href="http://webjestic.net">webJestic</a></p>
-</div>
 
 </body>
 </html>

@@ -15,65 +15,34 @@ if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
 
-$computing_id = mysqli_real_escape_string($con, $_POST['computing_id']);
-$first_name = mysqli_real_escape_string($con, $_POST['first_name']);
-$last_name = mysqli_real_escape_string($con, $_POST['last_name']);
-$year = mysqli_real_escape_string($con, $_POST['year']);
-$major = mysqli_real_escape_string($con, $_POST['major']);
+$employee_id = mysqli_real_escape_string($con, $_POST['employee_id']);
 $password = mysqli_real_escape_string($con, $_POST['password']);
-$query = "SELECT * FROM student WHERE computing_id = '$computing_id'";
+$query = "SELECT * FROM professor WHERE employee_id = '$employee_id'";
 $res = mysqli_query($con, $query);
-$maj = strlen($major);
 
 mysqli_query($con, "ALTER TABLE student
-    ADD CONSTRAINT student_registration_status
-    CHECK (computing_id IN $computing_id)");
-
-mysqli_query($con, "ALTER TABLE student
-    ADD CONSTRAINT year_constraints
-    CHECK (year > 999 OR year < 9999)");
+    ADD CONSTRAINT instructor_registration_status
+    CHECK (employee_id IN $employee_id)");
 
 if(isset($_POST['register'])) {
-    if(empty($computing_id)) {
-        $idErr = "Computing ID is required";
+    if(empty($employee_id)) {
+        $idErr = "Employee ID is required";
     }
-    if (($res->num_rows) > 0) {
-        $idErr = "Computing ID already registered";
-    }
-    if(empty($first_name)) {
-        $fnErr = "First name is required";
-    }
-    if(empty($last_name)) {
-        $lnErr = "Last name is required";
-    }
-    if(empty($year)) {
-        $yearErr = "Year is required";
-    }
-    else if(is_nan($year) OR $year < 999 OR $year > 9999) {
-        $yearErr = "Year must be a 4 digit number";
-    }
-    if(empty($major)) {
-        $majErr = "Major is required";
-    }
-    if($maj < 2 OR $maj > 4) {
-        $majErr = "Major must be the 2, 3, or 4 letter department abbreviation";
-    }
-    if(empty($major)) {
-        $majErr = "Major is required";
+    if (!empty($employee_id) AND ($res->num_rows) < 1) {
+        $idErr = "Instructor not found";
     }
     if(empty($password)) {
         $passErr = "Password is required";
     }
 }
 
-if(($computing_id != "") and ($first_name != "") and ($last_name != "") and ($year != "") and ($major != "") and ($password != "")) {
-    mysqli_query($con, "INSERT INTO student (computing_id, first_name, last_name, year, major, password)
-        VALUES ('$computing_id', '$first_name', '$last_name', '$year', '$major', '$password')");
+if(($employee_id != "") and ($password != "")) {
+    mysqli_query($con, "UPDATE professor SET password = '$password' WHERE employee_id = '$employee_id'");
 
-    $computing_id = $first_name = $last_name = $year = $major = $password = "";
+    $employee_id = $password = "";
     
     if(isset($_POST['register'])) { 
-        $message = "You have been added to the system! Please try to login now.";
+        $message = "You have been added to the system as an instructor! Please try to login now.";
     }
 }
 
@@ -152,21 +121,12 @@ mysqli_close($con);
                                         Register
                                     </h2>
                                     <div class="art-PostContent">
-                                        <p>If you haven't entered yourself into the system yet, pleae fill out this form to do so. However, if you've already registered before and simply can't remember your password, use the "Reset Password" link instead.</p>
-                                        <p>If you're a professor and have not set up your instructor account yet, click <a href="instructorreg.php">here</a> to do so.</p>
+                                        <p>If you are an instructor in the CS Department at the University of Virginia and have yet to make an account with us, you may do so here by inputting your Employee ID and desired password.</p>
                                         <p><div class="form">
                                             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" id="register">
                                                 <table><tr>
-                                                    <td><label>Computing ID</label></td>
-                                                    <td><input type="text" name="computing_id" value="<?php echo htmlentities($computing_id) ?>" placeholder="ex. mst3k"><span class="error"> * <?php echo $idErr;?></span></td></tr>
-                                                    <tr><td><label>First Name</label></td>
-                                                        <td><input type="text" name="first_name" value="<?php echo htmlentities($first_name) ?>" placeholder="ex. Bob"><span class="error"> * <?php echo $fnErr;?></span></td></tr>
-                                                        <tr><td><label>Last Name</label></td>
-                                                            <td><input type="text" name="last_name" value="<?php echo htmlentities($last_name) ?>" placeholder="ex. Kim"><span class="error"> * <?php echo $lnErr;?></span></td></tr>
-                                                            <tr><td><label>Year</label></td>
-                                                                <td><input type="text" name="year" value="<?php echo htmlentities($year) ?>" placeholder="ex. 2015"><span class="error"> * <?php echo $yearErr;?></span></td></tr>
-                                                                <tr><td><label>Major</label></td>
-                                                                    <td><input type="text" name="major" value="<?php echo htmlentities($major) ?>" placeholder="ex. BACS"><span class="error"> * <?php echo $majErr;?></span></td></tr>
+                                                    <td><label>Employee ID</label></td>
+                                                    <td><input type="text" name="employee_id" value="<?php echo htmlentities($employee_id) ?>" placeholder="ex. mst3k"><span class="error"> * <?php echo $idErr;?></span></td></tr>
                                                                     <tr><td><label>Password</label></td>
                                                                         <td><input type="password" name="password" value="<?php echo htmlentities($password) ?>" placeholder="ex. password"><span class="error"> * <?php echo $passErr;?></span></td></tr></table>
                                                                         <p><span class="art-button-wrapper">

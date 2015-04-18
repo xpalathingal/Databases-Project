@@ -1,8 +1,12 @@
 <?php
 include('login.php'); // Includes Login Script
 
-if(isset($_SESSION['login_user'])) {
+if(isset($_SESSION['login_user']) AND $_SESSION['user_role'] == "student") {
     header("location: profile.php");
+}
+
+if(isset($_SESSION['login_user']) AND $_SESSION['user_role'] == "instructor") {
+    header("location: instructor.php");
 }
 
 $con = mysqli_connect("stardock.cs.virginia.edu", "cs4750ydc5yf", "yujin", "cs4750ydc5yf");
