@@ -1,12 +1,8 @@
 <?php
 include('login.php'); // Includes Login Script
 
-if(isset($_SESSION['login_user']) AND $_SESSION['user_role'] == "student") {
+if(isset($_SESSION['login_user'])) {
     header("location: profile.php");
-}
-
-if(isset($_SESSION['login_user']) AND $_SESSION['user_role'] == "instructor") {
-    header("location: instructor.php");
 }
 
 $con = mysqli_connect("stardock.cs.virginia.edu", "cs4750ydc5yf", "yujin", "cs4750ydc5yf");
@@ -24,14 +20,6 @@ $password = mysqli_real_escape_string($con, $_POST['password']);
 $query = "SELECT * FROM student WHERE computing_id = '$computing_id'";
 $res = mysqli_query($con, $query);
 $maj = strlen($major);
-
-mysqli_query($con, "ALTER TABLE student
-    ADD CONSTRAINT student_registration_status
-    CHECK (computing_id IN $computing_id)");
-
-mysqli_query($con, "ALTER TABLE student
-    ADD CONSTRAINT year_constraints
-    CHECK (year > 999 OR year < 9999)");
 
 if(isset($_POST['register'])) {
     if(empty($computing_id)) {
@@ -67,7 +55,7 @@ if(isset($_POST['register'])) {
 }
 
 if(($computing_id != "") and ($first_name != "") and ($last_name != "") and ($year != "") and ($major != "") and ($password != "")) {
-    mysqli_query($con, "INSERT INTO student (computing_id, first_name, last_name, year, major, password)
+    mysqli_query($con,"INSERT INTO student (computing_id, first_name, last_name, year, major, password)
         VALUES ('$computing_id', '$first_name', '$last_name', '$year', '$major', '$password')");
 
     $computing_id = $first_name = $last_name = $year = $major = $password = "";
@@ -153,7 +141,6 @@ mysqli_close($con);
                                     </h2>
                                     <div class="art-PostContent">
                                         <p>If you haven't entered yourself into the system yet, pleae fill out this form to do so. However, if you've already registered before and simply can't remember your password, use the "Reset Password" link instead.</p>
-                                        <p>If you're a professor and have not set up your instructor account yet, click <a href="instructorreg.php">here</a> to do so.</p>
                                         <p><div class="form">
                                             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" id="register">
                                                 <table><tr>

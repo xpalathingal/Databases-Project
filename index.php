@@ -1,11 +1,8 @@
 <?php
 include('login.php'); // Includes Login Script
 
-if(isset($_SESSION['login_user']) AND ($_SESSION['user_role'] == "student")) {
+if(isset($_SESSION['login_user'])) {
     header("location: profile.php");
-}
-if(isset($_SESSION['login_user']) AND ($_SESSION['user_role'] == "instructor")) {
-    header("location: instructor.php");
 }
 ?>
 

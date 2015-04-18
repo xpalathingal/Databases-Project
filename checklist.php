@@ -7,11 +7,6 @@ if(mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
 
-if($_SESSION['user_role'] !== "student") {
-    mysql_close($con); // Closing Connection
-    header('Location: index.php'); // Redirecting To Home Page
-}
-
 $results = mysqli_query($con, "SELECT *
     FROM student NATURAL JOIN requirements NATURAL JOIN course
     WHERE computing_id ='$login_session' AND course_id NOT IN 
@@ -105,7 +100,7 @@ mysqli_close($con);
 
                                     while($row = mysqli_fetch_array($results)) {
                                       echo "<tr>";
-                                      echo "<td>" . $row['department']. " " . $row['course_id'] . "</td>";
+                                      echo "<td>" . $row['course_id'] . "</td>";
                                       echo "<td>" . $row['name'] . "</td>";
                                       echo "<td>" . $row['credits'] . "</td>";
                                       echo "</tr>";
@@ -113,19 +108,10 @@ mysqli_close($con);
 
                                   echo "</table>";
                                   ?>
-                                  </br>
-<form action="export.php" method="post" name="export_excel">
- 
-            <div class="control-group">
-                <div class="controls">
-                    <button type="submit" id="export" name="export" class="btn btn-primary button-loading" data-loading-text="Loading...">Export MySQL Data to JSON</button>
-                </div>
-            </div>
-        </form> 
                                         </div>
                                     </div>
-                                
-                                <div class="cleared"></div>
+                        
+                        		<div class="cleared"></div>
                             </div>
                         </div>
                     </div>

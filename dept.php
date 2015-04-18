@@ -11,15 +11,7 @@ $person = $_SESSION['login_user'];
 $query = "SELECT * FROM student WHERE computing_id = '$person'";
 $res = mysqli_query($con, $query);
 $row = mysqli_fetch_assoc($res);
-if($res->num_rows > 0) {
-    $greet = $row['first_name'];
-}
-else {
-    $query2 = "SELECT * FROM professor WHERE employee_id = '$person'";
-    $res2 = mysqli_query($con, $query2);
-    $row2 = mysqli_fetch_assoc($res2);
-    $greet = $row2['first_name'];
-}
+$greet = $row['first_name'];
 
 mysqli_close($con);
 ?>
@@ -132,32 +124,19 @@ mysqli_close($con);
                                         <div class="r"></div>
                                         <?php
 
-                                        if(isset($_SESSION['login_user']) AND $_SESSION['user_role'] == "student") {
-                                        echo '<div class="art-header-tag-icon">';
-                                        echo '<div class="t">Welcome back!</div></div>';
-                                        echo '</div><div class="art-BlockContent">';
-                                        echo '<div class="art-BlockContent-body">';
-                                        echo '<div align="center">Hello there, ';
-                                        echo $greet;
-                                        echo '.<br><br><a href="schedule.php">My Schedule</a>';
-                                        echo '<br><a href="history.php">Course History</a>';
-                                        echo '<br><a href="checklist.php">Course Checklist</a>';
-                                        echo '<br><a href="settings.php">Settings</a>';
-                                        echo '<br><a href="logout.php">Log Out</a>';
-                                    }
-                                    else if(isset($_SESSION['login_user']) AND $_SESSION['user_role'] == "instructor") {
-                                        echo '<div class="art-header-tag-icon">';
-                                        echo '<div class="t">Welcome back!</div></div>';
-                                        echo '</div><div class="art-BlockContent">';
-                                        echo '<div class="art-BlockContent-body">';
-                                        echo '<div align="center">Hello there, ';
-                                        echo $greet;
-                                        echo '.<br><br><a href="manageclasses.php">Manage Classes</a>';
-                                        echo '<br><a href="managestudents.php">Manage Students</a>';
-                                        echo '<br><a href="instrsettings.php">Settings</a>';
-                                        echo '<br><a href="logout.php">Log Out</a>';
-                                    }
-                                        else {
+                                        if(isset($_SESSION['login_user'])) {
+                                            echo '<div class="art-header-tag-icon">';
+                                            echo '<div class="t">Welcome back!</div></div>';
+                                            echo '</div><div class="art-BlockContent">';
+                                            echo '<div class="art-BlockContent-body">';
+                                            echo '<div align="center">Hello there, ';
+                                            echo $greet;
+                                            echo '.<br><br><a href="schedule.php">My Schedule</a>';
+                                            echo '<br><a href="history.php">Course History</a>';
+                                            echo '<br><a href="checklist.php">Course Checklist</a>';
+                                            echo '<br><a href="settings.php">Settings</a>';
+                                            echo '<br><a href="logout.php">Log Out</a>';
+                                        } else {
                                             echo '<div class="art-header-tag-icon">';
                                             echo '<div class="t">Login</div></div>';
                                             echo '</div><div class="art-BlockContent">';

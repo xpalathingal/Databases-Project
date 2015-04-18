@@ -7,11 +7,6 @@ if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
 
-if($_SESSION['user_role'] !== "student") {
-    mysql_close($con); // Closing Connection
-    header('Location: index.php'); // Redirecting To Home Page
-}
-
 $section_id = mysqli_real_escape_string($con, $_GET['section_id']);
 $course_id = mysqli_real_escape_string($con, $_GET['course_id']);
 $name = mysqli_real_escape_string($con, $_GET['name']);

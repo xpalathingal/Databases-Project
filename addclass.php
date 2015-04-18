@@ -7,13 +7,8 @@ if(mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
 
-if($_SESSION['user_role'] !== "student") {
-    mysql_close($con); // Closing Connection
-    header('Location: index.php'); // Redirecting To Home Page
-}
-
 $sec_id = $_GET['sec_id'];
-$sectionlist = mysqli_query($con, "SELECT section_id FROM section");
+$sectionlist = mysqli_query($con,"SELECT section_id FROM section");
 $validupdate = 0;
 
 mysqli_close($con);
@@ -94,13 +89,13 @@ mysqli_close($con);
                                             while($validsection = mysqli_fetch_array($sectionlist)) {
 													if ($sec_id == $validsection['section_id']) {
 
-														$sql = mysqli_query($con, "INSERT INTO takes (computing_id, section_id) VALUES ('$login_session', $sec_id)");
+														$sql = mysqli_query($con,"INSERT INTO takes (computing_id, section_id) VALUES ('$login_session', $sec_id)");
 
 												$section_id = mysqli_real_escape_string($con, $_GET['section_id']);
 												$course_id = mysqli_real_escape_string($con, $_GET['course_id']);
 												$name = mysqli_real_escape_string($con, $_GET['name']);
 
-												$results = mysqli_query($con, "SELECT * FROM takes natural join section natural join course WHERE computing_id = '$login_session'");
+												$results = mysqli_query($con,"SELECT * FROM takes natural join section natural join course WHERE computing_id = '$login_session'");
                                                 echo "Below is your new course schedule:";
 
 												echo "<table border='1'>

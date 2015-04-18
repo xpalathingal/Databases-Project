@@ -6,11 +6,6 @@ if(!isset($_SESSION['login_user'])) {
     header("location: index.php");
 }
 
-if($_SESSION['user_role'] !== "student") {
-    mysql_close($con); // Closing Connection
-    header('Location: index.php'); // Redirecting To Home Page
-}
-
 $con = mysqli_connect("stardock.cs.virginia.edu", "cs4750ydc5yf", "yujin", "cs4750ydc5yf");
 // Check connection
 if(mysqli_connect_errno()) {

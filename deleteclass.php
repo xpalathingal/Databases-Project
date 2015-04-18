@@ -1,20 +1,15 @@
 <?php
 include('session.php');
 
-$con = mysqli_connect("stardock.cs.virginia.edu", "cs4750ydc5yf", "yujin", "cs4750ydc5yf");
+$con= mysqli_connect("stardock.cs.virginia.edu", "cs4750ydc5yf", "yujin", "cs4750ydc5yf");
 // Check connection
 if(mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
 
-if($_SESSION['user_role'] !== "student") {
-    mysql_close($con); // Closing Connection
-    header('Location: index.php'); // Redirecting To Home Page
-}
-
 $sec_id = $_GET['sec_id'];
 $validdelete = 0;
-$takeslist = mysqli_query($con, "SELECT section_id FROM takes WHERE computing_id = '$login_session'");
+$takeslist = mysqli_query($con,"SELECT section_id FROM takes WHERE computing_id = '$login_session'");
 
 mysqli_close($con);
 ?>
@@ -150,57 +145,21 @@ mysqli_close($con);
                             <div class="art-Block-cc"></div>
                             <div class="art-Block-body">
                                         <div class="art-BlockHeader">
-                                    <div class="l"></div>
-                                    <div class="r"></div>
-                                    <?php
-
-                                    if(isset($_SESSION['login_user']) AND $_SESSION['user_role'] == "student") {
-                                        echo '<div class="art-header-tag-icon">';
-                                        echo '<div class="t">Welcome back!</div></div>';
-                                        echo '</div><div class="art-BlockContent">';
-                                        echo '<div class="art-BlockContent-body">';
-                                        echo '<div align="center">Hello there, ';
-                                        echo $greet;
-                                        echo '.<br><br><a href="schedule.php">My Schedule</a>';
-                                        echo '<br><a href="history.php">Course History</a>';
-                                        echo '<br><a href="checklist.php">Course Checklist</a>';
-                                        echo '<br><a href="settings.php">Settings</a>';
-                                        echo '<br><a href="logout.php">Log Out</a>';
-                                    }
-                                    else if(isset($_SESSION['login_user']) AND $_SESSION['user_role'] == "instructor") {
-                                        echo '<div class="art-header-tag-icon">';
-                                        echo '<div class="t">Welcome back!</div></div>';
-                                        echo '</div><div class="art-BlockContent">';
-                                        echo '<div class="art-BlockContent-body">';
-                                        echo '<div align="center">Hello there, ';
-                                        echo $greet;
-                                        echo '.<br><br><a href="manageclasses.php">Manage Classes</a>';
-                                        echo '<br><a href="managestudents.php">Manage Students</a>';
-                                        echo '<br><a href="instrsettings.php">Settings</a>';
-                                        echo '<br><a href="logout.php">Log Out</a>';
-                                    }
-                                        else {
-                                        echo '<div class="art-header-tag-icon">';
-                                        echo '<div class="t">Login</div></div>';
-                                        echo '</div><div class="art-BlockContent">';
-                                        echo '<div class="art-BlockContent-body">';
-                                        echo '<form class="loginform" method="post" action=""><table><tr>';
-                                        echo '<td><label>Username</label></td>';
-                                        echo '<td><input type="text" name="username" placeholder="ex. mst3k"></td></tr>';
-                                        echo '<tr><td><label>Password</label></td>';
-                                        echo '<td><input type="password" name="pass"></td></tr></table>';
-                                        echo '<div align="center"><p><span class="error">';
-                                        echo $error;
-                                        echo '</span></p>';
-                                        echo '<span class="art-button-wrapper">';
-                                        echo '<span class="l"> </span>';
-                                        echo '<span class="r"> </span>';
-                                        echo '<input class="art-button" type="submit" name="login" value="Login" /></span></form>';
-                                        echo '<p><div class="art-Footer-text"><a href="/~ydc5yf/register.php">Register</a> | <a href="/~ydc5yf/reset.php">Reset Password</a></div>';
-                                    }
-                                    ?>
-                                </div>
-                                <div class="cleared"></div>
+                                            <div class="l"></div>
+                                            <div class="r"></div>
+                                            <div class="art-header-tag-icon">
+                                                <div class="t">Welcome back!</div>
+                                            </div>
+                                        </div><div class="art-BlockContent">
+                                            <div class="art-BlockContent-body">
+                                            <div align="center">Hello there, <?php echo $greet; ?>.
+                                                <br><br><a href="schedule.php">My Schedule</a>
+                                                <br><a href="history.php">Course History</a>
+                                                <br><a href="checklist.php">Course Checklist</a>
+                                                <br><a href="settings.php">Settings</a>
+										        <br><a href="logout.php">Log Out</a>
+                                            </div>
+                                        		<div class="cleared"></div>
                                             </div>
                                         </div>
                         		<div class="cleared"></div>
