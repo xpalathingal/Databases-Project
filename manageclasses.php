@@ -6,81 +6,22 @@ if(!isset($_SESSION['login_user'])) {
     header("location: index.php");
 }
 
-if($_SESSION['user_role'] !== "student") {
-    mysql_close($con); // Closing Connection
-    header('Location: index.php'); // Redirecting To Home Page
-}
-
 $con = mysqli_connect("stardock.cs.virginia.edu", "cs4750ydc5yf", "yujin", "cs4750ydc5yf");
 // Check connection
 if(mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
 
+if($_SESSION['user_role'] !== "instructor") {
+    mysql_close($con); // Closing Connection
+    header('Location: index.php'); // Redirecting To Home Page
+}
+
 $person = $_SESSION['login_user'];
-$query = "SELECT * FROM student WHERE computing_id = '$person'";
+$query = "SELECT * FROM professor WHERE employee_id = '$person'";
 $res = mysqli_query($con, $query);
 $row = mysqli_fetch_assoc($res);
 $greet = $row['first_name'];
-
-$computing_id = mysqli_real_escape_string($con, $_SESSION['login_user']);
-$first_name = mysqli_real_escape_string($con, $_POST['first_name']);
-$last_name = mysqli_real_escape_string($con, $_POST['last_name']);
-$year = mysqli_real_escape_string($con, $_POST['year']);
-$major = mysqli_real_escape_string($con, $_POST['major']);
-$password = mysqli_real_escape_string($con, $_POST['password']);
-$confirm = mysqli_real_escape_string($con, $_POST['confirm']);
-$maj = strlen($major);
-
-if(isset($_POST['update'])) {
-    if(!empty($year) AND (is_nan($year) OR $year < 999 OR $year > 9999)) {
-        $yearErr = "Year must be a 4 digit number";
-        $year = "";
-    }
-    if(!empty($major) AND ($maj < 2 OR $maj > 4)) {
-        $majErr = "Major must be the 2, 3, or 4 letter department abbreviation";
-        $major = "";
-    }
-    if($password != $confirm) {
-        $conErr = "The passwords do not match";
-        $password = "";
-        $confirm = "";
-    }
-    $message = "";
-}
-
-if(isset($_POST['update']) AND (!empty($first_name) OR !empty($last_name) OR !empty($year) OR !empty($major) OR (!empty($password) AND $password = $confirm)) AND $yearErr != "Year must be a 4 digit number" AND $majErr != "Major must be the 2, 3, or 4 letter department abbreviation" AND $conErr != "The passwords do not match") {
-    if($first_name != "") {
-        mysqli_query($con, "UPDATE student SET first_name = '$first_name' WHERE computing_id = '$computing_id'");
-        $first_name = "";
-        $message = "Your information has been updated! Please refresh to see any changes applied.";
-    }
-
-    if($last_name != "") {
-        mysqli_query($con, "UPDATE student SET last_name = '$last_name' WHERE computing_id = '$computing_id'");
-        $last_name = "";
-        $message = "Your information has been updated! Please refresh to see any changes applied.";
-    }
-
-    if($year != "") {
-        mysqli_query($con, "UPDATE student SET year = '$year' WHERE computing_id = '$computing_id'");
-        $year = "";
-        $message = "Your information has been updated! Please refresh to see any changes applied.";
-    }
-
-    if($major != "") {
-        mysqli_query($con, "UPDATE student SET major = '$major' WHERE computing_id = '$computing_id'");
-        $major = "";
-        $message = "Your information has been updated! Please refresh to see any changes applied.";
-    }
-
-    if($password != "") {
-        mysqli_query($con, "UPDATE student SET password = '$password' WHERE computing_id = '$computing_id'");
-        $password = "";
-        $confirm = "";
-        $message = "Your information has been updated! Please refresh to see any changes applied.";
-    }
-}
 
 mysqli_close($con);
 ?>
@@ -153,36 +94,11 @@ mysqli_close($con);
                             <div class="art-Post-body">
                                 <div class="art-Post-inner">
                                     <h2 class="art-PostHeader">
-                                        Settings
+                                        Manage Classes
                                     </h2>
                                     <div class="art-PostContent">
-                                        <p>Here you can update your name, year, major, and password as necessary.</p>
-                                        <p><div class="form">
-                                            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" id="update">
-                                                <table><tr>
-                                                    <td><label>First Name</label></td>
-                                                    <td><input type="text" name="first_name" value="<?php echo htmlentities($first_name) ?>" placeholder="ex. Bob"></td></tr>
-                                                    <tr><td><label>Last Name</label></td>
-                                                        <td><input type="text" name="last_name" value="<?php echo htmlentities($last_name) ?>" placeholder="ex. Kim"></td></tr>
-                                                        <tr><td><label>Year</label></td>
-                                                            <td><input type="text" name="year" value="<?php echo htmlentities($year) ?>" placeholder="ex. 2015"><span class="error"> <?php echo $yearErr;?></span></td></tr>
-                                                            <tr><td><label>Major</label></td>
-                                                                <td><input type="text" name="major" value="<?php echo htmlentities($major) ?>" placeholder="ex. BACS"><span class="error"> <?php echo $majErr;?></span></td></tr>
-                                                                <tr><td><label>Password</label></td>
-                                                                    <td><input type="password" name="password" value="<?php echo htmlentities($password) ?>" placeholder="ex. password"></td></tr>
-                                                                    <tr><td><label>Confirm Password</label></td>
-                                                                        <td><input type="password" name="confirm" value="<?php echo htmlentities($confirm) ?>" placeholder="ex. password"><span class="error"> <?php echo $conErr;?></span></td></tr></table>
-                                                                        <p><span class="art-button-wrapper">
-                                                                            <span class="l"> </span>
-                                                                            <span class="r"> </span>
-                                                                            <input class="art-button" type="submit" name="update" value="Update" />
-                                                                        </span></p>
-                                                                        <p><?php echo $message; ?>
-                                                                        </form>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
+                                        <p>Manage the classes you teach here.</p>
+                                            </div></div>
                                                             <div class="cleared"></div>
                                                         </div>
                                                     </div>
@@ -208,11 +124,10 @@ mysqli_close($con);
                                                             </div><div class="art-BlockContent">
                                                             <div class="art-BlockContent-body">
                                                                 <div align="center">Hello there, <?php echo $greet; ?>.
-                                                                    <br><br><a href="schedule.php">My Schedule</a>
-                                                                    <br><a href="history.php">Course History</a>
-                                                                    <br><a href="checklist.php">Course Checklist</a>
-                                                                    <br><a href="settings.php">Settings</a>
-                                                                    <br><a href="logout.php">Log Out</a>
+                                                                    <br><br><a href="manageclasses.php">Manage Classes</a>
+                                        <br><a href="managestudents.php">Manage Students</a>
+                                        <br><a href="instrsettings.php">Settings</a>
+                                        <br><a href="logout.php">Log Out</a>
                                                                 </div>
                                                                 <div class="cleared"></div>
                                                             </div>
