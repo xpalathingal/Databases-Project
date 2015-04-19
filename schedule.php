@@ -16,7 +16,8 @@ $section_id = mysqli_real_escape_string($con, $_GET['section_id']);
 $course_id = mysqli_real_escape_string($con, $_GET['course_id']);
 $name = mysqli_real_escape_string($con, $_GET['name']);
 
-$results = mysqli_query($con,"SELECT * FROM takes natural join section natural join course WHERE computing_id = '$login_session'");
+$results = mysqli_query($con,"SELECT * FROM takes natural join section natural join course
+ WHERE computing_id = '$login_session'AND semester = 2 AND year = 2015");
 
 mysqli_close($con);
 ?>
@@ -24,6 +25,24 @@ mysqli_close($con);
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US" xml:lang="en">
 <head>
+<script>
+
+function showHint(str) {
+    if (str.length == 0) { 
+        document.getElementById("txtHint").innerHTML = "";
+        return;
+    } else {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
+            }
+        }
+        xmlhttp.open("GET", "getclass.php?q=" + str, true);
+        xmlhttp.send();
+    }
+}
+</script>
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
@@ -114,11 +133,16 @@ mysqli_close($con);
 
                                       <p>Do you want to add a class to current class schedule?</p>
 
+                                                                             
+
                                       <form action="addclass.php" method="GET">
 
-                                        Section ID: <input type="text" name="sec_id"><br>
+                                        Section ID: <input type="text" name="sec_id" onkeyup="showHint(this.value)"><br>
+                                         <p>Suggestions: <span id="txtHint"></span></p>
                                         <input type="submit" value = "Add Class">
                                     </form>
+
+                                   
 
                                     <p>Do you want to delete a class from your current class schedule?</p>
                                     <form action="deleteclass.php" method="GET">

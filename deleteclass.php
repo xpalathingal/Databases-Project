@@ -16,7 +16,6 @@ $sec_id = $_GET['sec_id'];
 $validdelete = 0;
 $takeslist = mysqli_query($con, "SELECT section_id FROM takes WHERE computing_id = '$login_session'");
 
-mysqli_close($con);
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -100,7 +99,8 @@ mysqli_close($con);
 												$course_id = mysqli_real_escape_string($con, $_GET['course_id']);
 												$name = mysqli_real_escape_string($con, $_GET['name']);
 
-												$results = mysqli_query($con,"SELECT * FROM takes natural join section natural join course WHERE computing_id = '$login_session'");
+												$results = mysqli_query($con,"SELECT * FROM takes natural join section natural join course 
+                                                    WHERE computing_id = '$login_session'AND semester = 2 AND year = 2015");
 												echo "Below is your new course schedule:";
 												echo "<table border='1'>
 												<tr>
@@ -129,6 +129,8 @@ mysqli_close($con);
 												if ($validdelete ==0) {
 													echo "Inputted section was not in your schedule. No deletion was executed.";
 												}
+
+                                                mysqli_close($con);
 												?>
                                         </div>
                                     </div>

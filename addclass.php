@@ -13,10 +13,8 @@ if($_SESSION['user_role'] !== "student") {
 }
 
 $sec_id = $_GET['sec_id'];
-$sectionlist = mysqli_query($con, "SELECT section_id FROM section");
+$sectionlist = mysqli_query($con,"SELECT section_id FROM section WHERE semester = 2 AND year = 2015 AND enrolled < capacity");
 $validupdate = 0;
-
-mysqli_close($con);
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -47,10 +45,10 @@ mysqli_close($con);
             <div class="art-Sheet-cc"></div>
             <div class="art-Sheet-body">
                 <div class="art-nav">
-                	<div class="l"></div>
-                	<div class="r"></div>
-                	<ul class="art-menu">
-                		<li>
+                    <div class="l"></div>
+                    <div class="r"></div>
+                    <ul class="art-menu">
+                        <li>
                             <a href="/~ydc5yf" class=" active"><span class="l"></span><span class="r"></span><span class="t">Home</span></a>
                         </li>
                         <li>
@@ -72,7 +70,7 @@ mysqli_close($con);
                         <li>
                             <a href="about.php"><span class="l"></span><span class="r"></span><span class="t">About</span></a>
                         </li>
-                	</ul>
+                    </ul>
                 </div>
                 <div class="art-Header">
                     <div class="art-Header-jpeg"></div>
@@ -92,48 +90,49 @@ mysqli_close($con);
                                         <div class="art-PostContent">
                                             <?php 
                                             while($validsection = mysqli_fetch_array($sectionlist)) {
-													if ($sec_id == $validsection['section_id']) {
+                                                    if ($sec_id == $validsection['section_id']) {
 
-														$sql = mysqli_query($con, "INSERT INTO takes (computing_id, section_id) VALUES ('$login_session', $sec_id)");
+                                                        $sql = mysqli_query($con, "INSERT INTO takes (computing_id, section_id) VALUES ('$login_session', $sec_id)");
 
-												$section_id = mysqli_real_escape_string($con, $_GET['section_id']);
-												$course_id = mysqli_real_escape_string($con, $_GET['course_id']);
-												$name = mysqli_real_escape_string($con, $_GET['name']);
+                                                $section_id = mysqli_real_escape_string($con, $_GET['section_id']);
+                                                $course_id = mysqli_real_escape_string($con, $_GET['course_id']);
+                                                $name = mysqli_real_escape_string($con, $_GET['name']);
 
-												$results = mysqli_query($con, "SELECT * FROM takes natural join section natural join course WHERE computing_id = '$login_session'");
+                                                $results = mysqli_query($con,"SELECT * FROM takes natural join section natural join course
+                                                    WHERE computing_id = '$login_session'AND semester = 2 AND year = 2015");
                                                 echo "Below is your new course schedule:";
 
-												echo "<table border='1'>
-												<tr>
-												<th>Section ID</th>
-												<th>Course ID</th>
-												<th>Course Name</th>
-												</tr>";
+                                                echo "<table border='1'>
+                                                <tr>
+                                                <th>Section ID</th>
+                                                <th>Course ID</th>
+                                                <th>Course Name</th>
+                                                </tr>";
 
-												while($row = mysqli_fetch_array($results)) {
-												echo "<tr>";
-												echo "<td>" . $row['section_id'] . "</td>";
-												echo "<td>" . $row['course_id'] . "</td>";
-												echo "<td>" . $row['name'] . "</td>";
-												echo "</tr>";
-												}
+                                                while($row = mysqli_fetch_array($results)) {
+                                                echo "<tr>";
+                                                echo "<td>" . $row['section_id'] . "</td>";
+                                                echo "<td>" . $row['course_id'] . "</td>";
+                                                echo "<td>" . $row['name'] . "</td>";
+                                                echo "</tr>";
+                                                }
 
-												echo "</table>";
-												
-												mysqli_close($con);
+                                                echo "</table>";
+                                                
+                                                mysqli_close($con);
 
-												$validupdate = 1;
+                                                $validupdate = 1;
 
-												}
+                                                }
 
-												}
+                                                }
 
-												if ($validupdate == 0) {echo "Section is invalid, your schedule was not updated.";}
+                                                if ($validupdate == 0) {echo "Section is invalid, your schedule was not updated.";}
                                             ?>
                                         </div>
                                     </div>
                         
-                        		<div class="cleared"></div>
+                                <div class="cleared"></div>
                             </div>
                         </div>
                     </div>
@@ -162,12 +161,12 @@ mysqli_close($con);
                                                 <br><a href="history.php">Course History</a>
                                                 <br><a href="checklist.php">Course Checklist</a>
                                                 <br><a href="settings.php">Settings</a>
-										        <br><a href="logout.php">Log Out</a>
+                                                <br><a href="logout.php">Log Out</a>
                                             </div>
-                                        		<div class="cleared"></div>
+                                                <div class="cleared"></div>
                                             </div>
                                         </div>
-                        		<div class="cleared"></div>
+                                <div class="cleared"></div>
                             </div>
                         </div>
                         <div class="art-Block">
@@ -195,10 +194,10 @@ mysqli_close($con);
                                                 <br><b>Diane Lee</b> (dl4md)
                                                 <br><b>Xavier Palathingal</b> (xvp2he)
                                                 </div>
-                                        		<div class="cleared"></div>
+                                                <div class="cleared"></div>
                                             </div>
                                         </div>
-                        		<div class="cleared"></div>
+                                <div class="cleared"></div>
                             </div>
                         </div>
                     </div>
@@ -211,7 +210,7 @@ mysqli_close($con);
                     </div>
                     <div class="art-Footer-background"></div>
                 </div>
-        		<div class="cleared"></div>
+                <div class="cleared"></div>
             </div>
         </div>
         <div class="cleared"></div>
