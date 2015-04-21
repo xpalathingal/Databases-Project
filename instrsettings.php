@@ -1,15 +1,9 @@
 <?php
 include('login.php'); // Includes Login Script
-//include('session.php');
+include('connect.php');
 
 if(!isset($_SESSION['login_user'])) {
     header("location: index.php");
-}
-
-$con = mysqli_connect("stardock.cs.virginia.edu", "cs4750ydc5yf", "yujin", "cs4750ydc5yf");
-// Check connection
-if(mysqli_connect_errno()) {
-  echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
 
 if($_SESSION['user_role'] !== "instructor") {

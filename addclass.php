@@ -1,12 +1,6 @@
 <?php
 include('session.php');
 
-$con = mysqli_connect("stardock.cs.virginia.edu", "cs4750ydc5yf", "yujin", "cs4750ydc5yf");
-// Check connection
-if(mysqli_connect_errno()) {
-  echo "Failed to connect to MySQL: " . mysqli_connect_error();
-}
-
 if($_SESSION['user_role'] !== "student") {
     mysql_close($con); // Closing Connection
     header('Location: index.php'); // Redirecting To Home Page

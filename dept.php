@@ -1,11 +1,6 @@
 <?php
 include('login.php'); // Includes Login Script
-
-$con = mysqli_connect("stardock.cs.virginia.edu", "cs4750ydc5yf", "yujin", "cs4750ydc5yf");
-        // Check connection
-if(mysqli_connect_errno()) {
-  echo "Failed to connect to MySQL: " . mysqli_connect_error();
-}
+include('connect.php');
 
 $person = $_SESSION['login_user'];
 $query = "SELECT * FROM student WHERE computing_id = '$person'";

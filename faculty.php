@@ -1,25 +1,12 @@
 <?php
 include('login.php'); // Includes Login Script
-
-$con = mysqli_connect("stardock.cs.virginia.edu", "cs4750ydc5yf", "yujin", "cs4750ydc5yf");
-        // Check connection
-if(mysqli_connect_errno()) {
-  echo "Failed to connect to MySQL: " . mysqli_connect_error();
-}
+include('connect.php');
 
 $person = $_SESSION['login_user'];
 $query = "SELECT * FROM student WHERE computing_id = '$person'";
 $res = mysqli_query($con, $query);
 $row = mysqli_fetch_assoc($res);
-if($res->num_rows > 0) {
-    $greet = $row['first_name'];
-}
-else {
-    $query2 = "SELECT * FROM professor WHERE employee_id = '$person'";
-    $res2 = mysqli_query($con, $query2);
-    $row2 = mysqli_fetch_assoc($res2);
-    $greet = $row2['first_name'];
-}
+$greet = $row['first_name'];
 
 $first_name = mysqli_real_escape_string($con, $_GET['first_name']);
 $last_name = mysqli_real_escape_string($con, $_GET['last_name']);
@@ -28,8 +15,8 @@ $last_name = mysqli_real_escape_string($con, $_GET['last_name']);
 $phone_number = mysqli_real_escape_string($con, $_GET['phone_number']);
 $office_building = mysqli_real_escape_string($con, $_GET['office_building']);
 $office_number = mysqli_real_escape_string($con, $_GET['office_number']);
-$value = mysqli_real_escape_string($con, $_GET['value']);
-$results = mysqli_query($con,"SELECT * FROM professor LEFT OUTER JOIN rating on professor.employee_id = rating.employee_id");
+$rating = mysqli_real_escape_string($con, $_GET['value']);
+$results = mysqli_query($con,"SELECT * FROM professor");
 
 mysqli_close($con);
 ?>
@@ -120,7 +107,7 @@ mysqli_close($con);
                                             echo "<td>" . $row['employee_id']. "@virginia.edu" . "</td>";
                                             echo "<td>" . $row['phone_number'] . "</td>";
                                             echo "<td>" . $row['office_building']. " " . $row['office_number'] . "</td>";
-                                            echo "<td>" . $row['value'] . "</td>";
+                                            echo "<td>" . $row['rating'] . "</td>";
                                             echo "</tr>";
                                         }
                                         echo "</table>";
@@ -149,7 +136,7 @@ mysqli_close($con);
                                     <div class="r"></div>
                                     <?php
 
-                                    if(isset($_SESSION['login_user']) AND $_SESSION['user_role'] == "student") {
+                                    if(isset($_SESSION['login_user'])) {
                                         echo '<div class="art-header-tag-icon">';
                                         echo '<div class="t">Welcome back!</div></div>';
                                         echo '</div><div class="art-BlockContent">';
@@ -161,20 +148,7 @@ mysqli_close($con);
                                         echo '<br><a href="checklist.php">Course Checklist</a>';
                                         echo '<br><a href="settings.php">Settings</a>';
                                         echo '<br><a href="logout.php">Log Out</a>';
-                                    }
-                                    else if(isset($_SESSION['login_user']) AND $_SESSION['user_role'] == "instructor") {
-                                        echo '<div class="art-header-tag-icon">';
-                                        echo '<div class="t">Welcome back!</div></div>';
-                                        echo '</div><div class="art-BlockContent">';
-                                        echo '<div class="art-BlockContent-body">';
-                                        echo '<div align="center">Hello there, ';
-                                        echo $greet;
-                                        echo '.<br><br><a href="manageclasses.php">Manage Classes</a>';
-                                        echo '<br><a href="managestudents.php">Manage Students</a>';
-                                        echo '<br><a href="instrsettings.php">Settings</a>';
-                                        echo '<br><a href="logout.php">Log Out</a>';
-                                    }
-                                        else {
+                                    } else {
                                         echo '<div class="art-header-tag-icon">';
                                         echo '<div class="t">Login</div></div>';
                                         echo '</div><div class="art-BlockContent">';
