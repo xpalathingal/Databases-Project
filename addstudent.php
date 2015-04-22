@@ -16,8 +16,6 @@ $sec_id = $_GET['sec_id'];
 $student_id = $_GET['student_id'];
 $sectionlist = mysqli_query($con,"SELECT section_id FROM section NATURAL JOIN teaches WHERE semester = 2 AND year = 2015 AND employee_id = '$login_session'");
 $validupdate = 0;
-
-mysqli_close($con);
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
