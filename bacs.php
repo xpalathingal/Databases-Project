@@ -155,8 +155,7 @@ mysqli_close($con);
                                         echo '<div class="art-BlockContent-body">';
                                         echo '<div align="center">Hello there, ';
                                         echo $greet;
-                                        echo '.<br><br><a href="manageclasses.php">Manage Classes</a>';
-                                        echo '<br><a href="managestudents.php">Manage Students</a>';
+                                        echo '<br><br><a href="managestudents.php">Manage Students</a>';
                                         echo '<br><a href="instrsettings.php">Settings</a>';
                                         echo '<br><a href="logout.php">Log Out</a>';
                                     }

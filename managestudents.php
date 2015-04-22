@@ -1,6 +1,11 @@
 <?php
 include('login.php'); // Includes Login Script
-include('connect.php');
+mysqli_close($con);
+        $con = mysqli_connect("stardock.cs.virginia.edu", "cs4750xvp2heb", "instructor", "cs4750xvp2he");
+        // Check connection
+if(mysqli_connect_errno()) {
+  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+}
 
 if(!isset($_SESSION['login_user'])) {
     header("location: index.php");
@@ -16,6 +21,20 @@ $query = "SELECT * FROM professor WHERE employee_id = '$person'";
 $res = mysqli_query($con, $query);
 $row = mysqli_fetch_assoc($res);
 $greet = $row['first_name'];
+
+$department = mysqli_real_escape_string($con, $_GET['department']);
+$course_id = mysqli_real_escape_string($con, $_GET['course_id']);
+$name = mysqli_real_escape_string($con, $_GET['name']);
+$semester = mysqli_real_escape_string($con, $_GET['semester']);
+$year = mysqli_real_escape_string($con, $_GET['year']);
+$section_id = mysqli_real_escape_string($con, $_GET['section_id']);
+$computing_id = mysqli_real_escape_string($con, $_GET['computing_id']);
+$first_name = mysqli_real_escape_string($con, $_GET['first_name']);
+$last_name = mysqli_real_escape_string($con, $_GET['last_name']);
+$results = mysqli_query($con, "SELECT section_id, course_id, computing_id, first_name, 
+last_name, name, department FROM student NATURAL JOIN takes NATURAL JOIN section 
+NATURAL JOIN course NATURAL JOIN teaches WHERE employee_id = '$person' AND 
+section.semester = '2' AND section.year = '2015' ");
 
 mysqli_close($con);
 ?>
@@ -87,12 +106,52 @@ mysqli_close($con);
                         <div class="art-Post">
                             <div class="art-Post-body">
                                 <div class="art-Post-inner">
-                                    <h2 class="art-PostHeader">
-                                        Manage Students
-                                    </h2>
-                                    <div class="art-PostContent">
-                                        <p>Manage your little beasties here.</p>
-                                            </div></div>
+                                <h2 class="art-PostHeader">
+                                            Manage Students
+                                        </h2>
+                                        <div class="art-PostContent">
+                                        <?php
+                                            echo "<table border='1'>
+                                            <tr>
+                                            <th>Course</th>
+                                            <th>Name</th>
+                                            <th>Section</th>
+                                            <th>Student</th>
+                                            <th>Computing ID</th>
+                                            </tr>";
+                                            while($row = mysqli_fetch_array($results)) {
+                                            echo "<tr>";
+                                            echo "<td>" . $row['department']. " " . $row['course_id'] . "</td>";
+                                            echo "<td>" . $row['name'] . "</td>";
+                                            echo "<td>" . $row['section_id'] . "</td>";
+                                            echo "<td>" . $row['first_name']. " " . $row['last_name'] . "</td>";
+                                            echo "<td>" . $row['computing_id'] . "</td>";                                            
+                                            echo "</tr>";
+                                            }                                            
+                                            echo "</table>";
+                                            ?>
+
+
+                                            <p>Do you want to add a student to one of your classes?</p>
+
+                                                                             
+
+                                      <form action="addstudent.php" method="GET">
+                                        Section ID: <input type="text" name="sec_id"><br>
+                                         Student's computing ID: <input type="text" name="student_id"> <br>
+                                        <input type="submit" value = "Add student">
+                                    </form>
+
+
+                                     <p>Do you want to remove a student from one of your classes?</p>
+                                                                             
+                                      <form action="deletestudent.php" method="GET">
+                                        Section ID: <input type="text" name="sec_id"><br>
+                                         Student's computing ID: <input type="text" name="student_id"> <br>
+                                        <input type="submit" value = "Delete student">
+                                    </form>
+                                        </div>
+                                    </div>
                                                             <div class="cleared"></div>
                                                         </div>
                                                     </div>
@@ -118,8 +177,7 @@ mysqli_close($con);
                                                             </div><div class="art-BlockContent">
                                                             <div class="art-BlockContent-body">
                                                                 <div align="center">Hello there, <?php echo $greet; ?>.
-                                                                    <br><br><a href="manageclasses.php">Manage Classes</a>
-                                        <br><a href="managestudents.php">Manage Students</a>
+                                        <br><br><a href="managestudents.php">Manage Students</a>
                                         <br><a href="instrsettings.php">Settings</a>
                                         <br><a href="logout.php">Log Out</a>
                                                                 </div>

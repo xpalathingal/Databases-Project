@@ -90,7 +90,7 @@ mysqli_close($con);
                                         About
                                     </h2>
                                     <div class="art-PostContent">
-                                        ABOUT US????
+                                        We are all fourth years in section 001 of CS 4750.
                                     </div>
                                 </div>
 
@@ -135,8 +135,7 @@ mysqli_close($con);
                                         echo '<div class="art-BlockContent-body">';
                                         echo '<div align="center">Hello there, ';
                                         echo $greet;
-                                        echo '.<br><br><a href="manageclasses.php">Manage Classes</a>';
-                                        echo '<br><a href="managestudents.php">Manage Students</a>';
+                                        echo '<br><br><a href="managestudents.php">Manage Students</a>';
                                         echo '<br><a href="instrsettings.php">Settings</a>';
                                         echo '<br><a href="logout.php">Log Out</a>';
                                     }

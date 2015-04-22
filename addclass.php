@@ -5,6 +5,13 @@ if($_SESSION['user_role'] !== "student") {
     mysql_close($con); // Closing Connection
     header('Location: index.php'); // Redirecting To Home Page
 }
+mysqli_close($con);
+
+$con = mysqli_connect("stardock.cs.virginia.edu", "cs4750xvp2hec", "student", "cs4750xvp2he");
+        // Check connection
+if(mysqli_connect_errno()) {
+  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+}
 
 $sec_id = $_GET['sec_id'];
 $sectionlist = mysqli_query($con,"SELECT section_id FROM section WHERE semester = 2 AND year = 2015 AND enrolled < capacity");

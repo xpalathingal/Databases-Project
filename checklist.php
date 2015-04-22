@@ -5,9 +5,21 @@ if($_SESSION['user_role'] !== "student") {
     mysql_close($con); // Closing Connection
     header('Location: index.php'); // Redirecting To Home Page
 }
+mysqli_close($con);
+
+$con = mysqli_connect("stardock.cs.virginia.edu", "cs4750xvp2hec", "student", "cs4750xvp2he");
+        // Check connection
+if(mysqli_connect_errno()) {
+  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+}
+
+mysqli_query($con, "CREATE OR REPLACE VIEW student_reqs AS
+SELECT computing_id, course_id, name, credits
+FROM student NATURAL JOIN requirements NATURAL JOIN course
+ORDER BY student.computing_id");
 
 $results = mysqli_query($con, "SELECT *
-    FROM student NATURAL JOIN requirements NATURAL JOIN course
+    FROM student_reqs
     WHERE computing_id ='$login_session' AND course_id NOT IN 
         (SELECT course_id
         FROM takes NATURAL JOIN section

@@ -15,7 +15,7 @@ $password = mysqli_real_escape_string($con, $_POST['password']);
 $query = "SELECT * FROM professor WHERE employee_id = '$employee_id'";
 $res = mysqli_query($con, $query);
 
-mysqli_query($con, "ALTER TABLE student
+mysqli_query($con, "ALTER TABLE professor
     ADD CONSTRAINT instructor_registration_status
     CHECK (employee_id IN $employee_id)");
 

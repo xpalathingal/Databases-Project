@@ -148,7 +148,19 @@ mysqli_close($con);
                                         echo '<br><a href="checklist.php">Course Checklist</a>';
                                         echo '<br><a href="settings.php">Settings</a>';
                                         echo '<br><a href="logout.php">Log Out</a>';
-                                    } else {
+                                    }
+                                    else if(isset($_SESSION['login_user']) AND $_SESSION['user_role'] == "instructor") {
+                                        echo '<div class="art-header-tag-icon">';
+                                        echo '<div class="t">Welcome back!</div></div>';
+                                        echo '</div><div class="art-BlockContent">';
+                                        echo '<div class="art-BlockContent-body">';
+                                        echo '<div align="center">Hello there, ';
+                                        echo $greet;
+                                        echo '<br><br><a href="managestudents.php">Manage Students</a>';
+                                        echo '<br><a href="instrsettings.php">Settings</a>';
+                                        echo '<br><a href="logout.php">Log Out</a>';
+                                    }
+                                    else {
                                         echo '<div class="art-header-tag-icon">';
                                         echo '<div class="t">Login</div></div>';
                                         echo '</div><div class="art-BlockContent">';

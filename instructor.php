@@ -108,8 +108,7 @@ if($_SESSION['user_role'] !== "instructor") {
                                 </div><div class="art-BlockContent">
                                 <div class="art-BlockContent-body">
                                     <div align="center">Hello there, <?php echo $greet; ?>.
-                                        <br><br><a href="manageclasses.php">Manage Classes</a>
-                                        <br><a href="managestudents.php">Manage Students</a>
+                                        <br><br><a href="managestudents.php">Manage Students</a>
                                         <br><a href="instrsettings.php">Settings</a>
                                         <br><a href="logout.php">Log Out</a>
                                     </div>

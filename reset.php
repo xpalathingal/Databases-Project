@@ -13,7 +13,12 @@ if(isset($_SESSION['login_user']) AND $_SESSION['user_role'] == "instructor") {
 $computing_id = mysqli_real_escape_string($con, $_POST['computing_id']);
 $password = mysqli_real_escape_string($con, $_POST['password']);
 $confirm = mysqli_real_escape_string($con, $_POST['confirm']);
-$query = "SELECT * FROM student WHERE computing_id = '$computing_id'";
+if($_SESSION['user_role'] == "student") {
+    $query = "SELECT * FROM student WHERE computing_id = '$computing_id'";
+}
+else if($_SESSION['user_role'] == "instructor") {
+    $query = "SELECT * FROM professor WHERE employee_id = '$computing_id'";
+}
 $res = mysqli_query($con, $query);
 
 if(isset($_POST['reset'])) {
@@ -35,12 +40,23 @@ if(isset($_POST['reset'])) {
 }
 
 if(($computing_id != "") and ($idErr != "Account does not exist") and ($password != "") and ($confirm != "") and ($conErr != "The passwords do not match")) {
-    mysqli_query($con, "UPDATE student SET password = '$password' WHERE computing_id = '$computing_id'");
+    if($_SESSION['user_role'] == "student") {
+        mysqli_query($con, "UPDATE student SET password = '$password' WHERE computing_id = '$computing_id'");
 
-    $computing_id = $password = $confirm = "";
-    
-    if(isset($_POST['reset'])) { 
-        $message = "Your password has been reset! Please try to login now.";
+        $computing_id = $password = $confirm = "";
+        
+        if(isset($_POST['reset'])) { 
+            $message = "Your password has been reset! Please try to login now.";
+        }
+    }
+    else if($_SESSION['user_role'] == "instructor") {
+        mysqli_query($con, "UPDATE professor SET password = '$password' WHERE employee_id = '$computing_id'");
+
+        $computing_id = $password = $confirm = "";
+        
+        if(isset($_POST['reset'])) { 
+            $message = "Your password has been reset! Please try to login now.";
+        }
     }
 }
 

@@ -25,11 +25,13 @@ $room_number = mysqli_real_escape_string($con, $_GET['room_number']);
 $days = mysqli_real_escape_string($con, $_GET['days']);
 $start_time = mysqli_real_escape_string($con, $_GET['start_time']);
 $end_time = mysqli_real_escape_string($con, $_GET['end_time']);
+$capacity = mysqli_real_escape_string($con, $_GET['capacity']);
+$enrolled = mysqli_real_escape_string($con, $_GET['enrolled']);
 $results = mysqli_query($con,"SELECT * FROM course
     LEFT OUTER JOIN section on course.course_id = section.course_id
     LEFT OUTER JOIN held_in on section.section_id = held_in.section_id
     LEFT OUTER JOIN timeslots on section.timeslot_id = timeslots.timeslot_id
-    WHERE fall2015 = 1");
+    WHERE section.semester='2' AND section.year='2015' ");
 
 mysqli_close($con);
 ?>
@@ -113,6 +115,7 @@ mysqli_close($con);
                                         <th>Name</th>
                                         <th>Location</th>
                                         <th>Time</th>
+                                        <th>Capacity</th>
                                         <th>Section</th>
                                         </tr>";
                                         while($row = mysqli_fetch_array($results)) {
@@ -121,6 +124,7 @@ mysqli_close($con);
                                             echo "<td>" . $row['name'] . "</td>";
                                             echo "<td>" . $row['building']. " " . $row['room_number'] . "</td>";
                                             echo "<td>" . $row['days']. " " . $row['start_time']. "-" . $row['end_time'] . "</td>";
+                                            echo "<td>" . $row['enrolled']. "/" . $row['capacity'] . "</td>";
                                             echo "<td>" . $row['section_id'] . "</td>";
                                             echo "</tr>";
                                         }
@@ -170,8 +174,7 @@ mysqli_close($con);
                                         echo '<div class="art-BlockContent-body">';
                                         echo '<div align="center">Hello there, ';
                                         echo $greet;
-                                        echo '.<br><br><a href="manageclasses.php">Manage Classes</a>';
-                                        echo '<br><a href="managestudents.php">Manage Students</a>';
+                                        echo '<br><br><a href="managestudents.php">Manage Students</a>';
                                         echo '<br><a href="instrsettings.php">Settings</a>';
                                         echo '<br><a href="logout.php">Log Out</a>';
                                     }

@@ -20,10 +20,22 @@ if(isset($_POST['login'])) {
       $_SESSION['login_user'] = $id; // Initializing Session
       
       if(($res->num_rows) > 0) {
+        mysqli_close($con);
+        $con = mysqli_connect("stardock.cs.virginia.edu", "cs4750xvp2hec", "student", "cs4750xvp2he");
+        // Check connection
+if(mysqli_connect_errno()) {
+  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+}
             $_SESSION['user_role'] = "student";
             header("location: profile.php"); // Redirecting To Other Page
         }
         else if(($res2->num_rows) > 0) {
+          mysqli_close($con);
+          $con = mysqli_connect("stardock.cs.virginia.edu", "cs4750xvp2heb", "instructor", "cs4750xvp2he");
+        // Check connection
+if(mysqli_connect_errno()) {
+  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+}
             $_SESSION['user_role'] = "instructor";
             header("location: instructor.php"); // Redirecting To Other Page
         }

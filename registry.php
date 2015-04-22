@@ -27,7 +27,7 @@ $results = mysqli_query($con,"SELECT * FROM course
     LEFT OUTER JOIN section on course.course_id = section.course_id 
     LEFT OUTER JOIN teaches on section.section_id = teaches.section_id 
     LEFT OUTER JOIN professor on teaches.employee_id = professor.employee_id 
-    WHERE fall2015 = 1 ");
+    WHERE section.semester='2' AND section.year='2015' ");
 
 mysqli_close($con);
 ?>
@@ -168,8 +168,7 @@ mysqli_close($con);
                                         echo '<div class="art-BlockContent-body">';
                                         echo '<div align="center">Hello there, ';
                                         echo $greet;
-                                        echo '.<br><br><a href="manageclasses.php">Manage Classes</a>';
-                                        echo '<br><a href="managestudents.php">Manage Students</a>';
+                                        echo '<br><br><a href="managestudents.php">Manage Students</a>';
                                         echo '<br><a href="instrsettings.php">Settings</a>';
                                         echo '<br><a href="logout.php">Log Out</a>';
                                     }
